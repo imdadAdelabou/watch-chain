@@ -3,11 +3,24 @@ import "./App.css";
 import CustomModal from "./components/CustomModal";
 import { APP_TEXTS } from "./utils/constant";
 import { MetaMaskicon, XummIcon } from "./assets";
+import { useSDK } from "@metamask/sdk-react";
 import WalletBtn from "./components/WalletBtn";
+import { useState } from "react";
 
 function App() {
+  // const [account, setAccount] = useState<string>();
+  const { sdk } = useSDK();
   const onClickHandle = () => {};
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const connect = async () => {
+    try {
+      const accounts = await sdk?.connect();
+      console.log(accounts[0]);
+      // setAccount(accounts?.[0]);
+    } catch (err) {
+      console.warn("failed to connect..", err);
+    }
+  };
 
   return (
     <>
@@ -29,7 +42,9 @@ function App() {
           <WalletBtn
             label={APP_TEXTS.connectWithMetaMask}
             icon={MetaMaskicon}
-            onClick={() => {}}
+            onClick={() => {
+              connect();
+            }}
           />
           <WalletBtn
             label={APP_TEXTS.connectWithXumm}
