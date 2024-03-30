@@ -1,6 +1,7 @@
 const APP_TEXTS = {
   connectWithMetaMask: "MetaMask",
   signIn: "Sign In",
+  logOut: "Log Out",
   connectWallet: "Connect wallet",
   connectWithXumm: "Xumm",
 };

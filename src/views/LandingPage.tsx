@@ -11,6 +11,8 @@ import { useIsConnected, useMintToken } from "@nice-xrpl/react-xrpl";
 import Header from "../components/Header";
 import { Xumm } from "xumm";
 import { XummAuth } from "../features/auth/auth";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store";
 
 const LandingPage: React.FC = () => {
   const { sdk } = useSDK();
@@ -33,6 +35,8 @@ const LandingPage: React.FC = () => {
     }
   };
   const xummAuth = new XummAuth();
+  const dispatch: AppDispatch = useDispatch();
+  const jwt = useSelector((state: RootState) => state.user.jwt);
 
   return (
     <>
@@ -47,11 +51,11 @@ const LandingPage: React.FC = () => {
           <Header />
           <Button
             colorScheme=""
-            backgroundColor="#4E5769"
+            backgroundColor={jwt && jwt.length !== 0 ? "red" : "#4E5769"}
             color="white"
             onClick={onOpen}
           >
-            {APP_TEXTS.signIn}
+            {jwt && jwt.length !== 0 ? APP_TEXTS.logOut : APP_TEXTS.signIn}
           </Button>
         </Box>
       </Box>
@@ -73,7 +77,7 @@ const LandingPage: React.FC = () => {
             label={APP_TEXTS.connectWithXumm}
             icon={XummIcon}
             onClick={() => {
-              xummAuth.login();
+              xummAuth.login(dispatch);
             }}
           />
         </>
