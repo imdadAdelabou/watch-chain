@@ -6,18 +6,21 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 
 import theme from "./theme.ts";
+import { Networks, XRPLClient } from "@nice-xrpl/react-xrpl";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <MetaMaskProvider
-      debug={true}
-      sdkOptions={{
-        dappMetadata: { name: "Watch-chain", url: window.location.href },
-      }}
-    >
-      <ChakraProvider theme={theme}>
-        <App />
-      </ChakraProvider>
-    </MetaMaskProvider>
+    <XRPLClient network={Networks.Testnet}>
+      <MetaMaskProvider
+        debug={true}
+        sdkOptions={{
+          dappMetadata: { name: "Watch-chain", url: window.location.href },
+        }}
+      >
+        <ChakraProvider theme={theme}>
+          <App />
+        </ChakraProvider>
+      </MetaMaskProvider>
+    </XRPLClient>
   </React.StrictMode>
 );

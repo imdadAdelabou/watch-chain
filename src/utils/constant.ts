@@ -5,4 +5,11 @@ const APP_TEXTS = {
   connectWithXumm: "Xumm",
 };
 
-export { APP_TEXTS };
+const navBarItems = [
+  { name: "Home", path: "/" },
+  { name: "Marketplace", path: "/marketplace" },
+  { name: "Legal", path: "/legal" },
+  { name: "Support", path: "/support" },
+];
+
+export { APP_TEXTS, navBarItems };
