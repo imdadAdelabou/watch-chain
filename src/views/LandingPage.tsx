@@ -33,7 +33,7 @@ const LandingPage: React.FC = () => {
   const jwt = useSelector((state: RootState) => state.user.jwt);
   const account = useSelector((state: RootState) => state.user.me?.account);
   const socketUrl = "wss://s.devnet.rippletest.net:51233";
-  const { sendMessage, lastMessage, readyState } = useWebSocket(socketUrl);
+  const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 
   useEffect(() => {
     if (lastMessage != null) {
