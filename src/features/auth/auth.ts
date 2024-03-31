@@ -3,6 +3,8 @@ import { User } from "../../utils/types";
 import LocalStorage from "../../services/localStorage";
 import { AppDispatch } from "../../store";
 import { setJwt, setMe } from "../User/user.slice";
+import NftTokenMintService from "../../services/nftTokenMint";
+import { XummJsonTransaction } from "xumm-sdk/dist/src/types";
 
 abstract class Auth {
   abstract login(dispatch: AppDispatch): void;
@@ -26,9 +28,37 @@ class XummAuth extends Auth {
     dispatch(setMe(result.me));
   }
 
+  async createAndSubscribeToNftMint(
+    account: string,
+    transferFee: number,
+    uri: string
+  ) {
+    const nftPayload = new NftTokenMintService(account, transferFee, uri);
+    const result = await this._xumm?.payload?.createAndSubscribe(
+      {
+        ...(nftPayload.createNftTokenMintPayload() as XummJsonTransaction),
+      },
+      (eventMessage) => {
+        if (Object.keys(eventMessage.data).indexOf("opened") > -1) {
+          // Update the UI? The payload was opened.
+        }
+        if (Object.keys(eventMessage.data).indexOf("signed") > -1) {
+          // The `signed` property is present, true (signed) / false (rejected)
+          return eventMessage;
+        }
+      }
+    );
+    console.log("Payload URL:", result?.created.next.always);
+    console.log("Payload QR:", result?.created.refs.qr_png);
+
+    const payload = await result?.resolved;
+
+    console.log("Resolved", payload);
+  }
+
   logout() {
     console.log("Xumm logout");
   }
 }
 
-export { XummAuth };
+export default new XummAuth();

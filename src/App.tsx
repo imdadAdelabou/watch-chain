@@ -5,7 +5,7 @@ import { useDispatch } from "react-redux";
 import { AppDispatch } from "./store";
 import LocalStorage from "./services/localStorage";
 import { setJwt, setMe } from "./features/User/user.slice";
-import { MeType, User } from "./utils/types";
+import { MeType } from "./utils/types";
 
 function App() {
   const dispatch: AppDispatch = useDispatch();
