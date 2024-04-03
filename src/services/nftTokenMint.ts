@@ -1,4 +1,5 @@
 import { convertStringToHex } from "xrpl";
+import { NftCreatedType } from "../utils/types";
 
 class NftTokenMintService {
   _account: string;
@@ -36,6 +37,41 @@ class NftTokenMintService {
       command: "account_nfts",
       account: account,
       ledger_index: "validated",
+    });
+  }
+
+  static async getNftById(id: string) {
+    console.log(import.meta.env.VITE_JSON_RPC_URL);
+    const result = await fetch(import.meta.env.VITE_JSON_RPC_URL, {
+      mode: "no-cors",
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        method: "nft_info",
+        params: [
+          {
+            nft_id: id,
+          },
+        ],
+      }),
+    });
+    if (result.status !== 200) {
+      result.json().then((data) => {
+        console.log(data);
+      });
+    }
+  }
+
+  static getNfts(json: NftCreatedType) {
+    if (json.account_nfts.length === 0) {
+      return undefined;
+    }
+    json.account_nfts.forEach((nft) => {
+      console.log(nft.NFTokenID);
+      this.getNftById(nft.NFTokenID);
     });
   }
 }

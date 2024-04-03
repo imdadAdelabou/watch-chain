@@ -18,7 +18,11 @@ class LocalStorageService {
   }
 
   getJwt(): string | null {
-    return localStorage.getItem("jwt");
+    const json = localStorage.getItem("XummPkceJwt");
+    if (!json) return null;
+    const user = JSON.parse(json) as User;
+
+    return user.jwt;
   }
 
   getUser(): MeType | null {

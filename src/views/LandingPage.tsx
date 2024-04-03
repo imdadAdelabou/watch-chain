@@ -37,7 +37,8 @@ const LandingPage: React.FC = () => {
 
   useEffect(() => {
     if (lastMessage != null) {
-      console.log(lastMessage);
+      // console.log(JSON.parse(lastMessage.data));
+      NftTokenMintService.getNfts(JSON.parse(lastMessage.data)["result"]);
     }
   }, [lastMessage]);
 
