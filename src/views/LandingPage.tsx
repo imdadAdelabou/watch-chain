@@ -5,8 +5,8 @@ import { APP_TEXTS } from "../utils/constant";
 import { MetaMaskicon, XummIcon } from "../assets";
 import { useSDK } from "@metamask/sdk-react";
 import WalletBtn from "../components/WalletBtn";
-import { useEffect, useState } from "react";
-import { useIsConnected, useMintToken } from "@nice-xrpl/react-xrpl";
+import { useEffect } from "react";
+import { useIsConnected } from "@nice-xrpl/react-xrpl";
 
 import Header from "../components/Header";
 import XummAuth from "../features/auth/auth";

@@ -1,5 +1,5 @@
 import { navBarItems } from "../utils/constant";
-import { Heading, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 
 const Header: React.FC = () => {
   return (

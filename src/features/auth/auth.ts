@@ -1,6 +1,5 @@
 import { Xumm } from "xumm";
 import { User } from "../../utils/types";
-import LocalStorage from "../../services/localStorage";
 import { AppDispatch } from "../../store";
 import { setJwt, setMe } from "../User/user.slice";
 import NftTokenMintService from "../../services/nftTokenMint";
