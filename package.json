@@ -16,6 +16,7 @@
     "@metamask/sdk-react": "^0.17.2",
     "@nice-xrpl/react-xrpl": "^2.0.0",
     "@reduxjs/toolkit": "^2.2.2",
+    "axios": "^1.6.8",
     "framer-motion": "^11.0.14",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

@@ -1,5 +1,6 @@
 import { convertStringToHex } from "xrpl";
 import { NftCreatedType } from "../utils/types";
+import axios from "axios";
 
 class NftTokenMintService {
   _account: string;
@@ -42,26 +43,44 @@ class NftTokenMintService {
 
   static async getNftById(id: string) {
     console.log(import.meta.env.VITE_JSON_RPC_URL);
-    const result = await fetch(import.meta.env.VITE_JSON_RPC_URL, {
-      mode: "no-cors",
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-
-      body: JSON.stringify({
+    const result = await axios.post(
+      import.meta.env.VITE_JSON_RPC_URL,
+      {
         method: "nft_info",
         params: [
           {
             nft_id: id,
           },
         ],
-      }),
-    });
+      },
+      {
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Content-Type": "application/json",
+        },
+      }
+    );
+    // const result = await fetch(import.meta.env.VITE_JSON_RPC_URL, {
+    //   mode: "no-cors",
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+
+    //   body: JSON.stringify({
+    //     method: "nft_info",
+    //     params: [
+    //       {
+    //         nft_id: id,
+    //       },
+    //     ],
+    //   }),
+    // });
     if (result.status !== 200) {
-      result.json().then((data) => {
-        console.log(data);
-      });
+      console.log(result.data);
+      // result.json().then((data) => {
+      //   console.log(JSON.parse(data));
+      // });
     }
   }
 
