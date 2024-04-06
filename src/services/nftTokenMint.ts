@@ -1,5 +1,5 @@
-import { convertStringToHex } from "xrpl";
-import { NftCreatedType } from "../utils/types";
+import { convertHexToString, convertStringToHex } from "xrpl";
+import { Nft, NftCreatedType } from "../utils/types";
 import axios from "axios";
 
 class NftTokenMintService {
@@ -83,13 +83,17 @@ class NftTokenMintService {
     }
   }
 
-  static getNfts(json: NftCreatedType) {
+  static getNfts(json: NftCreatedType): Nft[] | undefined {
     if (json.account_nfts.length === 0) {
       return undefined;
     }
-    json.account_nfts.forEach((nft) => {
-      console.log(nft.NFTokenID);
-      this.getNftById(nft.NFTokenID);
+
+    return json.account_nfts.map((nft) => {
+      return {
+        ...nft,
+        URI:
+          import.meta.env.VITE_GATEWAY_PINATA_URL + convertHexToString(nft.URI),
+      };
     });
   }
 }

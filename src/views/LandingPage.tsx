@@ -7,6 +7,7 @@ import { useSDK } from "@metamask/sdk-react";
 import WalletBtn from "../components/WalletBtn";
 import { useEffect } from "react";
 import { useIsConnected } from "@nice-xrpl/react-xrpl";
+import { useState } from "react";
 
 import Header from "../components/Header";
 import XummAuth from "../features/auth/auth";
@@ -14,6 +15,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../services/nftTokenMint";
+import MyNfts from "../components/MyNfts";
+import { Nft } from "../utils/types";
 
 const LandingPage: React.FC = () => {
   const { sdk } = useSDK();
@@ -34,11 +37,15 @@ const LandingPage: React.FC = () => {
   const account = useSelector((state: RootState) => state.user.me?.account);
   const socketUrl = "wss://s.devnet.rippletest.net:51233";
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
+  const [nfts, setNfts] = useState<Nft[]>([]);
 
   useEffect(() => {
     if (lastMessage != null) {
       // console.log(JSON.parse(lastMessage.data));
-      NftTokenMintService.getNfts(JSON.parse(lastMessage.data)["result"]);
+      const nftResult = NftTokenMintService.getNfts(
+        JSON.parse(lastMessage.data)["result"]
+      );
+      if (nftResult) setNfts(() => [...nftResult]);
     }
   }, [lastMessage]);
 
@@ -83,6 +90,8 @@ const LandingPage: React.FC = () => {
       >
         Get nft
       </Button>
+
+      <MyNfts nfts={nfts} />
 
       <CustomModal
         isOpen={isOpen}

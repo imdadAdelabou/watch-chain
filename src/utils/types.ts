@@ -12,10 +12,17 @@ export interface Nft {
   Flags: number;
   Issuer: string;
   NFTokenID: string;
+  URI: string;
+  nft_serial: number;
+  TransferFee: number;
 }
 
 export interface NftCreatedType {
   account_nfts: Nft[];
+}
+
+export interface MyNftsProps {
+  nfts: Nft[];
 }
 
 export interface LocalStorageServiceType {

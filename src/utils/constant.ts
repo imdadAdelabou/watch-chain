@@ -4,6 +4,7 @@ const APP_TEXTS = {
   logOut: "Log Out",
   connectWallet: "Connect wallet",
   connectWithXumm: "Xumm",
+  myNft: "My NFTs",
 };
 
 const navBarItems = [
