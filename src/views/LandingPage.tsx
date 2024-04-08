@@ -17,6 +17,7 @@ import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../services/nftTokenMint";
 import MyNfts from "../components/MyNfts";
 import { Nft } from "../utils/types";
+import { Outlet } from "react-router-dom";
 
 const LandingPage: React.FC = () => {
   const { sdk } = useSDK();
@@ -70,7 +71,7 @@ const LandingPage: React.FC = () => {
           </Button>
         </Box>
       </Box>
-
+      <Outlet />
       <Button
         onClick={() =>
           XummAuth.createAndSubscribeToNftMint(
