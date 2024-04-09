@@ -30,3 +30,8 @@ export interface LocalStorageServiceType {
   setJwtToken(token: string): void;
   setWalletAddress(address: string): void;
 }
+
+export interface OptionWatchType {
+  value: string;
+  name: string;
+}
