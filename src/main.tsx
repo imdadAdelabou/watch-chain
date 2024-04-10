@@ -6,6 +6,8 @@ import { ChakraProvider } from "@chakra-ui/react";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 import { Provider } from "react-redux";
 
+import { PrimeReactProvider, PrimeReactContext } from "primereact/api";
+
 import theme from "./theme.ts";
 import { Networks, XRPLClient } from "@nice-xrpl/react-xrpl";
 import store from "./store.ts";
@@ -21,7 +23,9 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           }}
         >
           <ChakraProvider theme={theme}>
-            <App />
+            <PrimeReactProvider>
+              <App />
+            </PrimeReactProvider>
           </ChakraProvider>
         </MetaMaskProvider>
       </XRPLClient>

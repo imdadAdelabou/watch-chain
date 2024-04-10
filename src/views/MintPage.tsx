@@ -18,6 +18,11 @@ import {
   waterProofTypes,
 } from "../utils/constant";
 import { OptionWatchType } from "../utils/types";
+import XummAuth from "../features/auth/auth";
+import { useSelector } from "react-redux";
+import { RootState } from "../store";
+import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
+import Ipfs from "../services/ipfs";
 
 const MintPage: React.FC = ({}) => {
   const [transferFee, setTransferFee] = React.useState<number>(0);
@@ -30,6 +35,8 @@ const MintPage: React.FC = ({}) => {
   const [watchMovment, setWatchMovment] = React.useState<string>("");
   const [waterProof, setWaterProof] = React.useState<string>("");
   const [description, setDescription] = React.useState<string>("");
+  const [file, setFile] = React.useState<File | null>(null);
+  const account = useSelector((state: RootState) => state.user.me?.account);
 
   const genOptions = (options: OptionWatchType[]) => {
     return options.map((elm, index) => (
@@ -39,7 +46,7 @@ const MintPage: React.FC = ({}) => {
     ));
   };
 
-  const handleMint = () => {
+  const handleMint = async () => {
     console.log(nftName);
     console.log(nftBrand);
     console.log(watchCase);
@@ -49,11 +56,35 @@ const MintPage: React.FC = ({}) => {
     console.log(watchMovment);
     console.log(waterProof);
     console.log(transferFee);
+    console.log(description);
+    if (file != null) {
+      const URI = await new Ipfs(file).pinFileToIPFS();
+      XummAuth.createAndSubscribeToNftMint(account, transferFee, URI, [
+        { Memo: { MemoType: "name", MemoData: nftName } },
+        { Memo: { MemoType: "description", MemoData: description } },
+        { Memo: { MemoType: "brand", MemoData: nftBrand } },
+        { Memo: { MemoType: "watchCase", MemoData: watchCase } },
+        { Memo: { MemoType: "wristBand", MemoData: wristBand } },
+        { Memo: { MemoType: "watchDial", MemoData: watchDial } },
+        { Memo: { MemoType: "watchIndex", MemoData: watchIndex } },
+        { Memo: { MemoType: "watchMovment", MemoData: watchMovment } },
+        { Memo: { MemoType: "waterProof", MemoData: waterProof } },
+        { Memo: { MemoType: "transferFee", MemoData: transferFee.toString() } },
+      ]);
+    } else {
+      console.log("No file selected");
+    }
+  };
+
+  const onSelectHandle = (e: FileUploadSelectEvent) => {
+    if (e.files.length > 0) {
+      setFile(e.files[0]);
+    }
   };
 
   return (
     <div>
-      <Stack marginTop="20" width="40vw" marginX="auto">
+      <Stack marginTop="20" width={{ base: "90vw", md: "40vw" }} marginX="auto">
         <Input
           placeholder={APP_TEXTS.nftName}
           value={nftName}
@@ -120,7 +151,17 @@ const MintPage: React.FC = ({}) => {
           value={description}
           onChange={(e) => setDescription(e.target.value)}
         />
-
+        <div>
+          <h3>{APP_TEXTS.watchImage}</h3>
+          <FileUpload
+            mode="basic"
+            name="demo[]"
+            url="/api/upload"
+            accept="image/*"
+            maxFileSize={1000000}
+            onSelect={onSelectHandle}
+          />
+        </div>
         <Button
           colorScheme="blue"
           color="white"

@@ -35,3 +35,10 @@ export interface OptionWatchType {
   value: string;
   name: string;
 }
+
+export interface MemoType {
+  Memo: {
+    MemoType: string;
+    MemoData: string;
+  };
+}

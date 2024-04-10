@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { Button } from "@chakra-ui/react";
-import XummAuth from "../../features/auth/auth";
 import { AppDispatch, RootState } from "../../store";
 import { useDispatch, useSelector } from "react-redux";
 import { Nft } from "../../utils/types";
@@ -29,17 +28,6 @@ const IndexView: React.FC = ({}) => {
 
   return (
     <div>
-      <Button
-        onClick={() =>
-          XummAuth.createAndSubscribeToNftMint(
-            account,
-            10,
-            "QmdCovBTScVR3i3i6Qrji6yKdb1q3eUnPdgzmYW6HdRsn2"
-          )
-        }
-      >
-        Mint nft
-      </Button>
       <Button
         onClick={() =>
           sendMessage(NftTokenMintService.getConnectedUserNft(account))
