@@ -51,7 +51,6 @@ class NftTokenMintService {
       TransferFee: this._transferFee,
       NFTokenTaxon: 0,
       Flags: 8,
-      Fee: "10",
       URI: convertStringToHex(this._uri),
       Memos: _memos,
     };

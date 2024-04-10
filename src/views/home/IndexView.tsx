@@ -17,24 +17,22 @@ const IndexView: React.FC = ({}) => {
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 
   useEffect(() => {
+    sendMessage(NftTokenMintService.getConnectedUserNft(account));
+  }, []);
+
+  useEffect(() => {
     if (lastMessage != null) {
       // console.log(JSON.parse(lastMessage.data));
-      const nftResult = NftTokenMintService.getNfts(
-        JSON.parse(lastMessage.data)["result"]
-      );
-      if (nftResult) setNfts(() => [...nftResult]);
+      const resultEvent = JSON.parse(lastMessage.data)["result"];
+      if (resultEvent.account_nfts) {
+        const nftResult = NftTokenMintService.getNfts(resultEvent);
+        if (nftResult) setNfts(() => [...nftResult]);
+      }
     }
   }, [lastMessage]);
 
   return (
     <div>
-      <Button
-        onClick={() =>
-          sendMessage(NftTokenMintService.getConnectedUserNft(account))
-        }
-      >
-        Get nft
-      </Button>
       <MyNfts nfts={nfts} />
     </div>
   );

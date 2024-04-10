@@ -18,6 +18,14 @@ const APP_TEXTS = {
   theTransferFee: "The transfer fee between (0-50000)",
   mintLabel: "Mint",
   watchImage: "The watch image",
+  validation: "NFT mint Validation",
+  scanQr: "Scan the QR code with your Xumm app",
+  clickOnLink: "Alernatively click the following link: ",
+  confirm: "XUMM LINK",
+  nftMintSuccess: "NFT minted successfully",
+  tsxSuccess: "You have successfully signed and validated the transaction 🥳",
+  errorLabel: "Error",
+  errorOccuredWhileMinting: "An error occured while minting the NFT",
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
 };

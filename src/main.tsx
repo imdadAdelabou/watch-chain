@@ -23,9 +23,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
           }}
         >
           <ChakraProvider theme={theme}>
-            <PrimeReactProvider>
-              <App />
-            </PrimeReactProvider>
+            <App />
           </ChakraProvider>
         </MetaMaskProvider>
       </XRPLClient>

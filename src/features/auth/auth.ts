@@ -31,7 +31,11 @@ class XummAuth extends Auth {
     account: string,
     transferFee: number,
     uri: string,
-    memos: MemoType[]
+    memos: MemoType[],
+    setUrl: (url: string | undefined) => void,
+    setPayloadQr: (url: string | undefined) => void,
+    setModalIsOpen: (value: boolean) => void,
+    getResolvedValue: (value: unknown | undefined) => void
   ) {
     const nftPayload = new NftTokenMintService(
       account,
@@ -54,9 +58,19 @@ class XummAuth extends Auth {
       }
     );
     console.log("Payload URL:", result?.created.next.always);
+    setUrl(result?.created.next.always);
+    setPayloadQr(result?.created.refs.qr_png);
+    setModalIsOpen(
+      result?.created.next.always != undefined &&
+        result?.created.refs.qr_png != undefined
+    );
     console.log("Payload QR:", result?.created.refs.qr_png);
 
     const payload = await result?.resolved;
+    setUrl(undefined);
+    setPayloadQr(undefined);
+    setModalIsOpen(false);
+    getResolvedValue(payload);
 
     console.log("Resolved", payload);
   }
