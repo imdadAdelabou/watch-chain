@@ -6,6 +6,7 @@ export interface MeType {
 export interface User {
   jwt: string;
   me: MeType;
+  openClassBackDrop: string;
 }
 
 export interface Nft {
@@ -41,4 +42,7 @@ export interface MemoType {
     MemoType: string;
     MemoData: string;
   };
+}
+export interface HeaderType {
+  getOpenClassFun: (value: string) => void;
 }

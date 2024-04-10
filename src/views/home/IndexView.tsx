@@ -22,9 +22,8 @@ const IndexView: React.FC = ({}) => {
 
   useEffect(() => {
     if (lastMessage != null) {
-      // console.log(JSON.parse(lastMessage.data));
       const resultEvent = JSON.parse(lastMessage.data)["result"];
-      if (resultEvent.account_nfts) {
+      if (resultEvent && resultEvent.account_nfts) {
         const nftResult = NftTokenMintService.getNfts(resultEvent);
         if (nftResult) setNfts(() => [...nftResult]);
       }
@@ -32,7 +31,7 @@ const IndexView: React.FC = ({}) => {
   }, [lastMessage]);
 
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       <MyNfts nfts={nfts} />
     </div>
   );

@@ -9,11 +9,17 @@ import XummAuth from "../features/auth/auth";
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../store";
 import { Outlet } from "react-router-dom";
+import BackDrop from "../components/hamburger_bar/Backdrop";
+import React from "react";
 
 const LandingPage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const jwt = useSelector((state: RootState) => state.user.jwt);
+  const openClassBackDrop = useSelector(
+    (state: RootState) => state.user.openClassBackDrop
+  );
   const dispatch: AppDispatch = useDispatch();
+  const [openClass, setOpenClass] = React.useState("");
 
   return (
     <>
@@ -25,12 +31,13 @@ const LandingPage: React.FC = () => {
       >
         <div></div>
         <Box display="flex" alignItems="center" gap="20px">
-          <Header />
+          <Header getOpenClassFun={(_) => {}} />
           <Button
             colorScheme=""
             backgroundColor={jwt && jwt.length !== 0 ? "red" : "#4E5769"}
             color="white"
             onClick={onOpen}
+            display={["none", "block"]}
           >
             {jwt && jwt.length !== 0 ? APP_TEXTS.logOut : APP_TEXTS.signIn}
           </Button>
@@ -54,6 +61,8 @@ const LandingPage: React.FC = () => {
           />
         </>
       </CustomModal>
+
+      <BackDrop openClass={openClassBackDrop} />
     </>
   );
 };

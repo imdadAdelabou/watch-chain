@@ -7,6 +7,7 @@ const initialState: User = {
     account: "",
     picture: "",
   },
+  openClassBackDrop: "",
 };
 
 const userSlice = createSlice({
@@ -19,8 +20,11 @@ const userSlice = createSlice({
     setMe: (state, action: PayloadAction<MeType>) => {
       state.me = { ...action.payload };
     },
+    setOpenClassBackDrop: (state, action: PayloadAction<string>) => {
+      state.openClassBackDrop = action.payload;
+    },
   },
 });
 
-export const { setJwt, setMe } = userSlice.actions;
+export const { setJwt, setMe, setOpenClassBackDrop } = userSlice.actions;
 export default userSlice.reducer;
