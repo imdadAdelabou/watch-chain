@@ -6,5 +6,10 @@ describe("Test the minting process", () => {
   it("passes", () => {
     const navLinkMintElm = cy.get('[data-test-id="nav-link-mint"]');
     navLinkMintElm.should("be.visible");
+    navLinkMintElm.first().click();
+    const mintViewElm = cy.get('[data-test-id="mint-view"]');
+    mintViewElm.should("be.visible");
+    const nftElmElm = cy.get('[data-test-id="nft-name-input"]');
+    nftElmElm.should("be.visible");
   });
 });

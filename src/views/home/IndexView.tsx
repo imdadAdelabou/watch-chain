@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
-import { Button } from "@chakra-ui/react";
-import { AppDispatch, RootState } from "../../store";
-import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../store";
+import { useSelector } from "react-redux";
 import { Nft } from "../../utils/types";
 import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../../services/nftTokenMint";
@@ -11,8 +10,6 @@ const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
   const [nfts, setNfts] = React.useState<Nft[]>([]);
 
-  const dispatch: AppDispatch = useDispatch();
-  const jwt = useSelector((state: RootState) => state.user.jwt);
   const socketUrl = "wss://s.devnet.rippletest.net:51233";
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 

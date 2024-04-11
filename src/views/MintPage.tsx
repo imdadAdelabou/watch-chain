@@ -120,11 +120,12 @@ const MintPage: React.FC = ({}) => {
   };
 
   return (
-    <div data-testid="mint-view">
+    <div data-test-id="mint-view">
       <Stack marginTop="20" width={{ base: "90vw", md: "40vw" }} marginX="auto">
         <Input
           placeholder={APP_TEXTS.nftName}
           value={nftName}
+          data-test-id="nft-name-input"
           onChange={(e) => setNftName(e.target.value)}
         />
         <Input
