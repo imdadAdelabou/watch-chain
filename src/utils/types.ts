@@ -6,7 +6,7 @@ export interface MeType {
 export interface User {
   jwt: string;
   me: MeType;
-  openClassBackDrop: string;
+  openClassBackDrop?: string;
 }
 
 export interface Nft {

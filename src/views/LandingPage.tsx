@@ -19,7 +19,6 @@ const LandingPage: React.FC = () => {
     (state: RootState) => state.user.openClassBackDrop
   );
   const dispatch: AppDispatch = useDispatch();
-  const [openClass, setOpenClass] = React.useState("");
 
   return (
     <>
@@ -62,7 +61,7 @@ const LandingPage: React.FC = () => {
         </>
       </CustomModal>
 
-      <BackDrop openClass={openClassBackDrop} />
+      <BackDrop openClass={openClassBackDrop || ""} />
     </>
   );
 };
