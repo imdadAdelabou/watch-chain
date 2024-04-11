@@ -31,7 +31,7 @@ const LandingPage: React.FC = () => {
       >
         <div></div>
         <Box display="flex" alignItems="center" gap="20px">
-          <Header getOpenClassFun={(_) => {}} />
+          <Header />
           <Button
             colorScheme=""
             backgroundColor={jwt && jwt.length !== 0 ? "red" : "#4E5769"}
