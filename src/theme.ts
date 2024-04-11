@@ -1,6 +1,4 @@
 import { extendTheme } from "@chakra-ui/react";
-import { mode } from "@chakra-ui/theme-tools";
-import type { StyleFunctionProps } from "@chakra-ui/styled-system";
 
 // Version 1: Using objects
 const theme = extendTheme({

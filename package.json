@@ -16,7 +16,9 @@
     "@metamask/sdk-react": "^0.17.2",
     "@nice-xrpl/react-xrpl": "^2.0.0",
     "@reduxjs/toolkit": "^2.2.2",
+    "axios": "^1.6.8",
     "framer-motion": "^11.0.14",
+    "primereact": "^10.6.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^5.0.1",
@@ -24,8 +26,7 @@
     "react-router-dom": "^6.22.3",
     "react-use-websocket": "^4.8.1",
     "xrpl": "^3.0.0",
-    "xumm": "^1.7.7",
-    "xumm-sdk": "^1.11.1"
+    "xumm": "^1.7.7"
   },
   "devDependencies": {
     "@types/react": "^18.2.64",
@@ -33,6 +34,7 @@
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react": "^4.2.1",
+    "cypress": "^13.7.2",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",
