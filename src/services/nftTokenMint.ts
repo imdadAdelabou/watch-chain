@@ -1,35 +1,58 @@
 import { convertHexToString, convertStringToHex } from "xrpl";
-import { Nft, NftCreatedType } from "../utils/types";
+import { MemoType, Nft, NftCreatedType } from "../utils/types";
 import axios from "axios";
 
 class NftTokenMintService {
   _account: string;
   _transferFee: number;
   _uri: string;
+  _memos: MemoType[] = [];
 
-  constructor(account: string, transferFee: number, uri: string) {
+  constructor(
+    account: string,
+    transferFee: number,
+    uri: string,
+    memos: MemoType[]
+  ) {
     this._account = account;
     this._transferFee = transferFee;
     this._uri = uri;
+    this._memos = memos;
+  }
+
+  createMemo(key: string, value: string) {
+    return {
+      Memo: {
+        MemoType: convertStringToHex(key),
+        MemoData: convertStringToHex(value),
+      },
+    };
   }
 
   createNftTokenMintPayload() {
+    const _memos = [
+      {
+        Memo: {
+          MemoType: convertStringToHex("platform-creator"),
+          MemoData: convertStringToHex("watch-chain"),
+        },
+      },
+    ];
+
+    if (this._memos.length > 0) {
+      this._memos.forEach((memo) => {
+        _memos.push(this.createMemo(memo.Memo.MemoType, memo.Memo.MemoData));
+      });
+    }
+
     return {
       TransactionType: "NFTokenMint",
       Account: this._account,
       TransferFee: this._transferFee,
       NFTokenTaxon: 0,
       Flags: 8,
-      Fee: "10",
       URI: convertStringToHex(this._uri),
-      Memos: [
-        {
-          Memo: {
-            MemoType: convertStringToHex("platform-creator"),
-            MemoData: convertStringToHex("watch-chain"),
-          },
-        },
-      ],
+      Memos: _memos,
     };
   }
 

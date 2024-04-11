@@ -5,7 +5,6 @@ import "./index.css";
 import { ChakraProvider } from "@chakra-ui/react";
 import { MetaMaskProvider } from "@metamask/sdk-react";
 import { Provider } from "react-redux";
-
 import theme from "./theme.ts";
 import { Networks, XRPLClient } from "@nice-xrpl/react-xrpl";
 import store from "./store.ts";
