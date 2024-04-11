@@ -14,6 +14,7 @@ const HeaderLinks = (closeBlackDrop: () => void) => {
       style={{ color: "white" }}
       key={index}
       onClick={() => closeBlackDrop()}
+      data-test-id={"nav-link" + "-" + elm.name.toLocaleLowerCase()}
     >
       <li style={{ listStyle: "none", cursor: "pointer" }}>{elm.name} </li>
     </NavLink>

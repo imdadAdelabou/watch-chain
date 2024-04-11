@@ -28,6 +28,7 @@ import { FileUpload, FileUploadSelectEvent } from "primereact/fileupload";
 import Ipfs from "../services/ipfs";
 import CustomModal from "../components/CustomModal";
 import { useNavigate } from "react-router-dom";
+import { userIsConnected } from "../App";
 
 const MintPage: React.FC = ({}) => {
   const [transferFee, setTransferFee] = React.useState<number>(0);
@@ -58,6 +59,7 @@ const MintPage: React.FC = ({}) => {
   };
 
   const handleMint = async () => {
+    console.log(userIsConnected());
     setLoading(true);
     if (file != null) {
       const URI = await new Ipfs(file).pinFileToIPFS();
@@ -118,7 +120,7 @@ const MintPage: React.FC = ({}) => {
   };
 
   return (
-    <div>
+    <div data-testid="mint-view">
       <Stack marginTop="20" width={{ base: "90vw", md: "40vw" }} marginX="auto">
         <Input
           placeholder={APP_TEXTS.nftName}
@@ -201,7 +203,7 @@ const MintPage: React.FC = ({}) => {
           colorScheme="blue"
           color="white"
           marginTop="20px"
-          onClick={() => handleMint()}
+          onClick={userIsConnected() ? () => handleMint() : () => {}}
           isLoading={loading}
         >
           {APP_TEXTS.mintLabel}
