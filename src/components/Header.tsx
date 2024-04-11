@@ -2,7 +2,6 @@ import { NavLink } from "react-router-dom";
 import { navBarItems } from "../utils/constant";
 import { Box } from "@chakra-ui/react";
 import Hamburger from "./hamburger_bar/Hamburger";
-import { HeaderType } from "../utils/types";
 import { AppDispatch } from "../store";
 import { useDispatch } from "react-redux";
 import { setOpenClassBackDrop } from "../features/User/user.slice";
@@ -21,7 +20,7 @@ const HeaderLinks = (closeBlackDrop: () => void) => {
   ));
 };
 
-const Header: React.FC<HeaderType> = ({ getOpenClassFun }) => {
+const Header: React.FC = () => {
   const dispatch: AppDispatch = useDispatch();
 
   return (
