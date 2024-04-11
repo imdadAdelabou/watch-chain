@@ -131,11 +131,13 @@ const MintPage: React.FC = ({}) => {
         <Input
           placeholder={APP_TEXTS.nftBrand}
           value={nftBrand}
+          data-test-id="nft-brand-input"
           onChange={(e) => setNftBrand(e.target.value)}
         />
         <Select
           placeholder={APP_TEXTS.watchCase}
           value={watchCase}
+          data-test-id="nft-watch-case-input"
           onChange={(e) => setWatchCase(e.target.value)}
         >
           {genOptions(watchCasesTypes)}
@@ -143,6 +145,7 @@ const MintPage: React.FC = ({}) => {
         <Select
           placeholder={APP_TEXTS.wristBrand}
           value={wristBand}
+          data-test-id="nft-wrist-band-input"
           onChange={(e) => setWristBand(e.target.value)}
         >
           {genOptions(wristsBandsTypes)}
@@ -150,6 +153,7 @@ const MintPage: React.FC = ({}) => {
         <Select
           placeholder={APP_TEXTS.watchDials}
           value={watchDial}
+          data-test-id="nft-watch-dial-input"
           onChange={(e) => setWatchDial(e.target.value)}
         >
           {genOptions(watchDialsTypes)}
@@ -157,6 +161,7 @@ const MintPage: React.FC = ({}) => {
         <Select
           placeholder={APP_TEXTS.watchIndex}
           value={watchIndex}
+          data-test-id="nft-watch-index-input"
           onChange={(e) => setWatchIndex(e.target.value)}
         >
           {genOptions(watchIndexTypes)}
@@ -164,6 +169,7 @@ const MintPage: React.FC = ({}) => {
         <Select
           placeholder={APP_TEXTS.movmentType}
           value={watchMovment}
+          data-test-id="nft-watch-movment-input"
           onChange={(e) => setWatchMovment(e.target.value)}
         >
           {genOptions(watchMovmentTypes)}
@@ -171,6 +177,7 @@ const MintPage: React.FC = ({}) => {
         <Select
           placeholder={APP_TEXTS.waterProof}
           value={waterProof}
+          data-test-id="nft-water-proof-input"
           onChange={(e) => setWaterProof(e.target.value)}
         >
           {genOptions(waterProofTypes)}
@@ -179,6 +186,7 @@ const MintPage: React.FC = ({}) => {
         <NumberInput
           onChange={(fee) => setTransferFee(Number(fee))}
           value={transferFee.toString()}
+          data-test-id="nft-transfer-fee-input"
           min={0}
           max={50000}
         >
@@ -187,6 +195,7 @@ const MintPage: React.FC = ({}) => {
         <Textarea
           placeholder={APP_TEXTS.description}
           value={description}
+          data-test-id="nft-description-input"
           onChange={(e) => setDescription(e.target.value)}
         />
         <div>
