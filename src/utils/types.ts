@@ -65,3 +65,22 @@ export interface PinataPinnedFileType {
     mime_type: string;
   }[];
 }
+
+export interface NFTokenCreateSellOfferType {
+  Account: string;
+  NFTokenID: string;
+  Amount: string;
+  Flags: number;
+}
+
+export interface QrXummModalType {
+  url: string;
+  qr: string;
+}
+
+export interface NftOfferType {
+  amount: string;
+  flags: number;
+  nft_offer_index: string;
+  owner: string;
+}

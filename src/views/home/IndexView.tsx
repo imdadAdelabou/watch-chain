@@ -5,12 +5,12 @@ import { Nft } from "../../utils/types";
 import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../../services/nftTokenMint";
 import MyNfts from "../../components/MyNfts";
+import { socketUrl } from "../../utils/constant";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
   const [nfts, setNfts] = React.useState<Nft[]>([]);
 
-  const socketUrl = "wss://s.devnet.rippletest.net:51233";
   // const socketUrl = import.meta.env.VITE_WS_TEST_URL;
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 

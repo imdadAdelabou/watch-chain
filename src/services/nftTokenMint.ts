@@ -84,22 +84,6 @@ class NftTokenMintService {
       }
     );
     console.log("NFT BY ID", result.data);
-    // const result = await fetch(import.meta.env.VITE_JSON_RPC_URL, {
-    //   mode: "no-cors",
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-
-    //   body: JSON.stringify({
-    //     method: "nft_info",
-    //     params: [
-    //       {
-    //         nft_id: id,
-    //       },
-    //     ],
-    //   }),
-    // });
     if (result.status !== 200) {
       console.log(result.data);
       // result.json().then((data) => {

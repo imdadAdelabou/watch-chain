@@ -1,3 +1,5 @@
+import { PinataPinnedFileType } from "../utils/types";
+
 class Ipfs {
   JWT = import.meta.env.VITE_PINATA_JWT;
   _file: File;
@@ -35,7 +37,9 @@ class Ipfs {
     }
   }
 
-  static async getPinnedFileFromIPFS(ipfsHash: string) {
+  static async getPinnedFileFromIPFS(
+    ipfsHash: string
+  ): Promise<PinataPinnedFileType | undefined> {
     try {
       const res = await fetch(
         `${

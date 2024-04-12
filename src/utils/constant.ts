@@ -19,15 +19,23 @@ const APP_TEXTS = {
   mintLabel: "Mint",
   watchImage: "The watch image",
   validation: "NFT mint Validation",
+  transactionValidation: "Transaction Validation",
+  nftSellValidation: "NFT sell Validation",
   scanQr: "Scan the QR code with your Xumm app",
   clickOnLink: "Alernatively click the following link: ",
   confirm: "XUMM LINK",
   nftMintSuccess: "NFT minted successfully",
+  sellOfferSuccess: "Sell offer created successfully",
   tsxSuccess: "You have successfully signed and validated the transaction 🥳",
   errorLabel: "Error",
   errorOccuredWhileMinting: "An error occured while minting the NFT",
   noDescription: "No description written",
   noDetails: "No details written",
+  sell: "Place a sell offer",
+  buy: "Place a bid",
+  setPriceNft: "Set the price of the NFT",
+  priceLabel: "Price",
+  youOwnThisNftAndHaveSetAOffers: "You own this NFT and have set a sell offer",
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
 };
@@ -91,3 +99,5 @@ export {
   watchMovmentTypes,
   waterProofTypes,
 };
+
+export const socketUrl = "wss://s.devnet.rippletest.net:51233";
