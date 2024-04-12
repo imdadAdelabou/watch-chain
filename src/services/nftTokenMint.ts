@@ -47,6 +47,7 @@ class NftTokenMintService {
 
     return {
       TransactionType: "NFTokenMint",
+      Fee: "10",
       Account: this._account,
       TransferFee: this._transferFee,
       NFTokenTaxon: 0,
@@ -67,7 +68,7 @@ class NftTokenMintService {
   static async getNftById(id: string) {
     console.log(import.meta.env.VITE_JSON_RPC_URL);
     const result = await axios.post(
-      import.meta.env.VITE_JSON_RPC_URL,
+      "https://smart-few-patron.xrp-testnet.quiknode.pro/4c8681a57440231b6ee6bcd14aa6472eb04c7b2f/",
       {
         method: "nft_info",
         params: [
@@ -82,6 +83,7 @@ class NftTokenMintService {
         },
       }
     );
+    console.log("NFT BY ID", result.data);
     // const result = await fetch(import.meta.env.VITE_JSON_RPC_URL, {
     //   mode: "no-cors",
     //   method: "POST",
@@ -110,6 +112,7 @@ class NftTokenMintService {
     if (json.account_nfts.length === 0) {
       return undefined;
     }
+    // NftTokenMintService.getNftById(json.account_nfts[0].NFTokenID);
 
     return json.account_nfts.map((nft) => {
       return {

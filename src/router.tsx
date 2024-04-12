@@ -13,7 +13,7 @@ const router = createBrowserRouter(
     <Route path="/" element={<LandingPage />}>
       <Route path="/" element={<IndexView />} />,
       <Route path="/mint" element={<MintPage />} />,
-      <Route path="/nft" element={<NftPage />} />,
+      <Route path="/nft-details?" element={<NftPage />} />,
     </Route>,
   ])
 );

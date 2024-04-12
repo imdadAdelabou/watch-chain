@@ -1,8 +1,10 @@
 class Ipfs {
   JWT = import.meta.env.VITE_PINATA_JWT;
   _file: File;
-  constructor(file: File) {
+  _metadata: string;
+  constructor(file: File, metatada: string) {
     this._file = file;
+    this._metadata = metatada;
   }
 
   async pinFileToIPFS() {
@@ -11,10 +13,7 @@ class Ipfs {
 
       formData.append("file", this._file);
 
-      const pinataMetadata = JSON.stringify({
-        name: this._file.name,
-      });
-      formData.append("pinataMetadata", pinataMetadata);
+      formData.append("pinataMetadata", this._metadata);
 
       const pinataOptions = JSON.stringify({
         cidVersion: 0,
@@ -31,6 +30,25 @@ class Ipfs {
       const resData = await res.json();
 
       return resData.IpfsHash;
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  static async getPinnedFileFromIPFS(ipfsHash: string) {
+    try {
+      const res = await fetch(
+        `${
+          import.meta.env.VITE_PINATA_BASE_URL
+        }/data/pinList?hashContains=${ipfsHash}`,
+        {
+          headers: {
+            Authorization: `Bearer ${import.meta.env.VITE_PINATA_JWT}`,
+          },
+        }
+      );
+      const resData = await res.json();
+      return resData;
     } catch (error) {
       console.log(error);
     }

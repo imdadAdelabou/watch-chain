@@ -20,7 +20,7 @@ import {
   watchMovmentTypes,
   waterProofTypes,
 } from "../utils/constant";
-import { OptionWatchType } from "../utils/types";
+import { MetaDataEntryType, OptionWatchType } from "../utils/types";
 import XummAuth from "../features/auth/auth";
 import { useSelector } from "react-redux";
 import { RootState } from "../store";
@@ -62,25 +62,40 @@ const MintPage: React.FC = ({}) => {
     console.log(userIsConnected());
     setLoading(true);
     if (file != null) {
-      const URI = await new Ipfs(file).pinFileToIPFS();
+      const metadatas = [
+        { Memo: { MemoType: "name", MemoData: nftName } },
+        { Memo: { MemoType: "description", MemoData: description } },
+        { Memo: { MemoType: "brand", MemoData: nftBrand } },
+        { Memo: { MemoType: "watchCase", MemoData: watchCase } },
+        { Memo: { MemoType: "wristBand", MemoData: wristBand } },
+        { Memo: { MemoType: "watchDial", MemoData: watchDial } },
+        { Memo: { MemoType: "watchIndex", MemoData: watchIndex } },
+        { Memo: { MemoType: "watchMovment", MemoData: watchMovment } },
+        { Memo: { MemoType: "waterProof", MemoData: waterProof } },
+        {
+          Memo: { MemoType: "transferFee", MemoData: transferFee.toString() },
+        },
+      ];
+      const metadaForXRPL = [...metadatas];
+      const metadataForPina: MetaDataEntryType = {
+        name: nftName,
+        keyvalues: {},
+      };
+      delete metadatas[0];
+      metadatas.forEach(
+        (meta) =>
+          (metadataForPina.keyvalues[meta.Memo.MemoType] = meta.Memo.MemoData)
+      );
+      const URI = await new Ipfs(
+        file,
+        JSON.stringify(metadataForPina)
+      ).pinFileToIPFS();
+
       await XummAuth.createAndSubscribeToNftMint(
         account,
         transferFee,
         URI,
-        [
-          { Memo: { MemoType: "name", MemoData: nftName } },
-          { Memo: { MemoType: "description", MemoData: description } },
-          { Memo: { MemoType: "brand", MemoData: nftBrand } },
-          { Memo: { MemoType: "watchCase", MemoData: watchCase } },
-          { Memo: { MemoType: "wristBand", MemoData: wristBand } },
-          { Memo: { MemoType: "watchDial", MemoData: watchDial } },
-          { Memo: { MemoType: "watchIndex", MemoData: watchIndex } },
-          { Memo: { MemoType: "watchMovment", MemoData: watchMovment } },
-          { Memo: { MemoType: "waterProof", MemoData: waterProof } },
-          {
-            Memo: { MemoType: "transferFee", MemoData: transferFee.toString() },
-          },
-        ],
+        metadaForXRPL,
         (url) => setPayloadURL(url),
         (qr) => setPayloadQR(qr),
         (modalIsOpen) => setIsModalOpen(modalIsOpen),
@@ -121,7 +136,7 @@ const MintPage: React.FC = ({}) => {
 
   return (
     <div data-test-id="mint-view">
-      <Stack marginTop="20" width={{ base: "90vw", md: "40vw" }} marginX="auto">
+      <Stack marginTop="70" width={{ base: "90vw", md: "40vw" }} marginX="auto">
         <Input
           placeholder={APP_TEXTS.nftName}
           value={nftName}

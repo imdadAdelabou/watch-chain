@@ -46,3 +46,22 @@ export interface MemoType {
 export interface HeaderType {
   getOpenClassFun: (value: string) => void;
 }
+
+export interface MetaDataEntryType {
+  name: string;
+  keyvalues: {
+    [key: string]: string;
+  };
+}
+
+export interface PinataPinnedFileType {
+  count: number;
+  rows: {
+    date_pinned: string;
+    ipfs_pin_hash: string;
+    id: string;
+    size: number;
+    metadata: MetaDataEntryType;
+    mime_type: string;
+  }[];
+}

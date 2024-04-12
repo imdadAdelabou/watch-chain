@@ -11,6 +11,7 @@ const IndexView: React.FC = ({}) => {
   const [nfts, setNfts] = React.useState<Nft[]>([]);
 
   const socketUrl = "wss://s.devnet.rippletest.net:51233";
+  // const socketUrl = import.meta.env.VITE_WS_TEST_URL;
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 
   useEffect(() => {
@@ -21,6 +22,7 @@ const IndexView: React.FC = ({}) => {
     if (lastMessage != null) {
       const resultEvent = JSON.parse(lastMessage.data)["result"];
       if (resultEvent && resultEvent.account_nfts) {
+        console.log(resultEvent.account_nfts);
         const nftResult = NftTokenMintService.getNfts(resultEvent);
         if (nftResult) setNfts(() => [...nftResult]);
       }

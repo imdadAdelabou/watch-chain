@@ -3,8 +3,11 @@ import { APP_TEXTS } from "../utils/constant";
 import { Text, Avatar, Heading, HStack, Stack, Box } from "@chakra-ui/react";
 import { MyNftsProps, Nft } from "../utils/types";
 import { WatchChainIconWithoutBg } from "../assets";
+import { useNavigate } from "react-router-dom";
 
-const NftView: React.FC<Nft> = ({ URI, TransferFee }) => {
+const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
+  const naigate = useNavigate();
+
   return (
     <Box
       width="240px"
@@ -12,8 +15,13 @@ const NftView: React.FC<Nft> = ({ URI, TransferFee }) => {
       borderRadius="20"
       paddingTop="2"
       paddingBottom="4"
-      cursor="poniter"
+      cursor="pointer"
       paddingX="4"
+      onClick={() =>
+        naigate(
+          `/nft-details?uri=${URI}&transferFee=${TransferFee}&issuer=${Issuer}&nftTokenId=${NFTokenID}`
+        )
+      }
     >
       <Avatar
         size="xl"
