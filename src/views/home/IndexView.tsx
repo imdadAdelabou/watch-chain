@@ -6,6 +6,7 @@ import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../../services/nftTokenMint";
 import MyNfts from "../../components/MyNfts";
 import { socketUrl } from "../../utils/constant";
+import DiscoverOtherNft from "./DiscoverOtherNft";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
@@ -32,6 +33,7 @@ const IndexView: React.FC = ({}) => {
   return (
     <div style={{ padding: 20 }}>
       <MyNfts nfts={nfts} />
+      <DiscoverOtherNft />
     </div>
   );
 };
