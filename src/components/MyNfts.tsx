@@ -1,12 +1,28 @@
 import React from "react";
 import { APP_TEXTS } from "../utils/constant";
 import { Text, Avatar, Heading, HStack, Stack, Box } from "@chakra-ui/react";
-import { MyNftsProps, Nft } from "../utils/types";
+import { MyNftsProps, Nft, PinataPinnedFileType } from "../utils/types";
 import { WatchChainIconWithoutBg } from "../assets";
 import { useNavigate } from "react-router-dom";
+import Ipfs from "../services/ipfs";
 
 const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
   const naigate = useNavigate();
+  const [nftDetails, setNftDetails] = React.useState<
+    PinataPinnedFileType | undefined
+  >();
+
+  React.useEffect(() => {
+    if (URI) {
+      const split = URI.split("/");
+      Ipfs.getPinnedFileFromIPFS(split.at(split.length - 1) as string).then(
+        (res) => {
+          console.log(res);
+          setNftDetails(res);
+        }
+      );
+    }
+  }, []);
 
   return (
     <Box
@@ -37,7 +53,7 @@ const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
         marginTop="2"
         marginBottom="2"
       >
-        Title
+        {nftDetails ? nftDetails.rows[0].metadata.name : ""}
       </Heading>
       <Text
         fontSize="sm"
@@ -46,7 +62,7 @@ const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
         noOfLines={3}
         marginBottom="4"
       >
-        {APP_TEXTS.lorenIpsum}
+        {nftDetails ? nftDetails.rows[0].metadata.keyvalues.description : ""}
       </Text>
       <HStack>
         <Heading fontSize="lg" textAlign="start" color="white" marginTop="2">
