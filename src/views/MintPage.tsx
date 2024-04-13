@@ -19,6 +19,7 @@ import {
   watchIndexTypes,
   watchMovmentTypes,
   waterProofTypes,
+  socketUrl,
 } from "../utils/constant";
 import { MetaDataEntryType, OptionWatchType } from "../utils/types";
 import XummAuth from "../features/auth/auth";
@@ -29,6 +30,9 @@ import Ipfs from "../services/ipfs";
 import CustomModal from "../components/CustomModal";
 import { useNavigate } from "react-router-dom";
 import { userIsConnected } from "../App";
+
+import RedisService from "../services/redisService";
+import axios from "axios";
 
 const MintPage: React.FC = ({}) => {
   const [transferFee, setTransferFee] = React.useState<number>(0);
@@ -100,7 +104,20 @@ const MintPage: React.FC = ({}) => {
         (qr) => setPayloadQR(qr),
         (modalIsOpen) => setIsModalOpen(modalIsOpen),
         (resolved) => {
-          if (resolved != undefined) {
+          const tixid = (resolved as any).payload.response.txid;
+          console.log(tixid, "TXID");
+          if ((resolved as any).data.signed) {
+            axios
+              .post(`${import.meta.env.VITE_SERVER_API_URL}/transaction-info`, {
+                tixid: tixid,
+              })
+              .then((res) => {
+                console.log("Transaction info: ", res.data);
+                RedisService.addNftIdToUser(
+                  account,
+                  res.data.data.result.meta.nftoken_id
+                );
+              });
             toast({
               position: "top-right",
               title: APP_TEXTS.nftMintSuccess,

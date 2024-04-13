@@ -101,4 +101,4 @@ export {
   waterProofTypes,
 };
 
-export const socketUrl = "wss://s.devnet.rippletest.net:51233";
+export const socketUrl = import.meta.env.VITE_WS_TEST_URL;
