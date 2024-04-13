@@ -1,5 +1,10 @@
 import { Xumm } from "xumm";
-import { MemoType, NFTokenCreateSellOfferType, User } from "../../utils/types";
+import {
+  MemoType,
+  NFTokenAcceptOfferType,
+  NFTokenCreateSellOfferType,
+  User,
+} from "../../utils/types";
 import { AppDispatch } from "../../store";
 import { setJwt, setMe } from "../User/user.slice";
 import NftTokenMintService from "../../services/nftTokenMint";
@@ -90,6 +95,43 @@ class XummAuth extends Auth {
   ) {
     const result = await this._xumm?.payload?.createAndSubscribe(
       NFTCreateOffer.createNFTokenSellOfferPayload(data),
+      (eventMessage) => {
+        if (Object.keys(eventMessage.data).indexOf("opened") > -1) {
+          // Update the UI? The payload was opened.
+        }
+        if (Object.keys(eventMessage.data).indexOf("signed") > -1) {
+          // The `signed` property is present, true (signed) / false (rejected)
+          return eventMessage;
+        }
+      }
+    );
+    console.log("Payload URL:", result?.created.next.always);
+    setUrl(result?.created.next.always);
+    setPayloadQr(result?.created.refs.qr_png);
+    setModalIsOpen(
+      result?.created.next.always != undefined &&
+        result?.created.refs.qr_png != undefined
+    );
+    console.log("Payload QR:", result?.created.refs.qr_png);
+
+    const payload = await result?.resolved;
+    setUrl(undefined);
+    setPayloadQr(undefined);
+    setModalIsOpen(false);
+    getResolvedValue(payload);
+
+    console.log("Resolved", payload);
+  }
+
+  async createAndSubscribeToNftAcceptSellOffer(
+    data: NFTokenAcceptOfferType,
+    setUrl: (url: string | undefined) => void,
+    setPayloadQr: (url: string | undefined) => void,
+    setModalIsOpen: (value: boolean) => void,
+    getResolvedValue: (value: unknown | undefined) => void
+  ) {
+    const result = await this._xumm?.payload?.createAndSubscribe(
+      NFTCreateOffer.createAcceptSellOffer(data.Account, data.NFTokenSellOffer),
       (eventMessage) => {
         if (Object.keys(eventMessage.data).indexOf("opened") > -1) {
           // Update the UI? The payload was opened.

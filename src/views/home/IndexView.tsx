@@ -50,7 +50,10 @@ const IndexView: React.FC = ({}) => {
               Flags: nft.flags,
               Issuer: nft.issuer,
               NFTokenID: nft.nft_id,
-              URI: NftTokenMintService.convertURIToPinataURL(nft.uri),
+              URI:
+                nft.uri && nft.uri.length > 0
+                  ? NftTokenMintService.convertURIToPinataURL(nft.uri)
+                  : "",
               nft_serial: nft.nft_serial,
               TransferFee: nft.transfer_fee,
             };

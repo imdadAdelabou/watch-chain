@@ -39,9 +39,8 @@ const Marketplace: React.FC = () => {
             };
             if (typeof offer != "boolean") {
               nftToAdd.offer = offer;
+              nfts.push(nftToAdd);
             }
-
-            nfts.push(nftToAdd);
           }
         }
       }

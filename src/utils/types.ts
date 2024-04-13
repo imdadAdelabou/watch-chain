@@ -74,6 +74,11 @@ export interface NFTokenCreateSellOfferType {
   Flags: number;
 }
 
+export interface NFTokenAcceptOfferType {
+  Account: string;
+  NFTokenSellOffer: string;
+}
+
 export interface QrXummModalType {
   url: string;
   qr: string;

@@ -47,6 +47,31 @@ class RedisService {
       return {};
     }
   }
+
+  static async removeNftIdFromUser(
+    owner: string,
+    nftId: string,
+    newOwner: string
+  ): Promise<boolean> {
+    try {
+      const result = await axios.post(
+        `${
+          import.meta.env.VITE_SERVER_API_URL
+        }/remove-nft-id-from-user-and-set-new-user-with-removed-id`,
+        {
+          userId: owner,
+          nftId: nftId,
+          newUserId: newOwner,
+        }
+      );
+      if (result.status === 200) return true;
+
+      return false;
+    } catch (error) {
+      console.error(error);
+      return false;
+    }
+  }
 }
 
 export default RedisService;

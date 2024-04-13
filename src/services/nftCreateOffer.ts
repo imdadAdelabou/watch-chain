@@ -15,6 +15,17 @@ class NFTCreateOffer {
     };
   }
 
+  static createAcceptSellOffer(
+    account: string,
+    nftTokenSellOfer: string
+  ): XummJsonTransaction {
+    return {
+      TransactionType: "NFTokenAcceptOffer",
+      Account: account,
+      NFTokenSellOffer: nftTokenSellOfer,
+    };
+  }
+
   static getNFTSellOffer(nftTokenId: string): string {
     return JSON.stringify({
       command: "nft_sell_offers",

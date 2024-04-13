@@ -27,6 +27,7 @@ const APP_TEXTS = {
   nftMintSuccess: "NFT minted successfully",
   sellOfferSuccess: "Sell offer created successfully",
   tsxSuccess: "You have successfully signed and validated the transaction 🥳",
+  buyOfferSuccess: "Buy offer created successfully",
   errorLabel: "Error",
   errorOccuredWhileMinting: "An error occured while minting the NFT",
   noDescription: "No description written",
