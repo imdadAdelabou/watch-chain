@@ -19,7 +19,6 @@ import {
   watchIndexTypes,
   watchMovmentTypes,
   waterProofTypes,
-  socketUrl,
 } from "../utils/constant";
 import { MetaDataEntryType, OptionWatchType } from "../utils/types";
 import XummAuth from "../features/auth/auth";
