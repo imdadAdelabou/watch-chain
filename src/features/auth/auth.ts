@@ -5,7 +5,6 @@ import { setJwt, setMe } from "../User/user.slice";
 import NftTokenMintService from "../../services/nftTokenMint";
 import { XummJsonTransaction } from "xumm-sdk/dist/src/types";
 import NFTCreateOffer from "../../services/nftCreateOffer";
-import { convertHexToString } from "xrpl";
 
 abstract class Auth {
   abstract login(dispatch: AppDispatch): void;

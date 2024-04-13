@@ -16,6 +16,7 @@ export interface Nft {
   URI: string;
   nft_serial: number;
   TransferFee: number;
+  offer?: NftOfferType;
 }
 
 export interface NftCreatedType {

@@ -69,9 +69,9 @@ const IndexView: React.FC = ({}) => {
       <Text fontSize="3xl" as="b">
         {APP_TEXTS.myNft} ({nfts.length})
       </Text>
-      <MyNfts nfts={nfts} key={"1"} />
+      <MyNfts nfts={nfts} />
       <DiscoverOtherNft />
-      <MyNfts nfts={othersNfts} key={"2"} />
+      <MyNfts nfts={othersNfts} />
     </div>
   );
 };

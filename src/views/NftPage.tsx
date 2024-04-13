@@ -102,6 +102,8 @@ const NftPage: React.FC = () => {
           {APP_TEXTS.youOwnThisNftAndHaveSetAOffers}
         </p>
       );
+    } else if (offers && offers.owner != account) {
+      return <Button colorScheme="blue">{APP_TEXTS.acceptOffer}</Button>;
     } else if (!offers && issuer === account) {
       return (
         <Button

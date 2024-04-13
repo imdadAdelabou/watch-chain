@@ -75,7 +75,7 @@ class NftTokenMintService {
   ): Promise<QuickNodeNftResponse | undefined> {
     try {
       const result = await axios.post(
-        "https://smart-few-patron.xrp-testnet.quiknode.pro/4c8681a57440231b6ee6bcd14aa6472eb04c7b2f/",
+        import.meta.env.VITE_QUICK_NODE_API_URL,
         {
           method: "nft_info",
           params: [
