@@ -109,9 +109,7 @@ const NftPage: React.FC = () => {
   };
 
   const GenTheRightButton: React.FC = () => {
-    if (!youOwnedThisNft) {
-      return <Button colorScheme="blue">{APP_TEXTS.buy}</Button>;
-    } else if (offers && offers.owner === account) {
+    if (offers && offers.owner === account) {
       return (
         <p className="font-workSans text-[16px] leading-[35px] mb-[30px] text-center">
           {APP_TEXTS.youOwnThisNftAndHaveSetAOffers}
@@ -147,6 +145,14 @@ const NftPage: React.FC = () => {
           {APP_TEXTS.sell}
         </Button>
       );
+    } else if (!offers && youOwnedThisNft) {
+      <Button
+        colorScheme="blue"
+        onClick={() => handleSell()}
+        isLoading={isLoading}
+      >
+        {APP_TEXTS.sell}
+      </Button>;
     }
 
     return <Button colorScheme="blue">{APP_TEXTS.buy}</Button>;
