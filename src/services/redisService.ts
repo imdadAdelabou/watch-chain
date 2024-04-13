@@ -25,7 +25,7 @@ class RedisService {
 
   static async getAllUserWithNftIds(): Promise<UserWithftIdsType> {
     try {
-      const result = await axios.get(
+      const result = await axios.post(
         `${import.meta.env.VITE_SERVER_API_URL}/get-user-with-nft-ids`
       );
       if (result.status === 200) {
