@@ -84,3 +84,19 @@ export interface NftOfferType {
   nft_offer_index: string;
   owner: string;
 }
+
+export interface UserWithftIdsType {
+  [account: string]: string[];
+}
+
+export interface QuickNodeNftResponse {
+  issuer: string;
+  ledger_index: number;
+  nft_id: string;
+  nft_serial: number;
+  owner: string;
+  transfer_fee: number;
+  uri: string;
+
+  flags: number;
+}

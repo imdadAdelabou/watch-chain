@@ -5,19 +5,22 @@ import { Nft } from "../../utils/types";
 import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../../services/nftTokenMint";
 import MyNfts from "../../components/MyNfts";
-import { socketUrl } from "../../utils/constant";
+import { APP_TEXTS, socketUrl } from "../../utils/constant";
 import DiscoverOtherNft from "./DiscoverOtherNft";
+import RedisService from "../../services/redisService";
+import { Text } from "@chakra-ui/react";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
   const [nfts, setNfts] = React.useState<Nft[]>([]);
+  const [othersNfts, setOthersNfts] = React.useState<Nft[]>([]);
 
   // const socketUrl = import.meta.env.VITE_WS_TEST_URL;
   const { sendMessage, lastMessage } = useWebSocket(socketUrl);
 
   useEffect(() => {
     sendMessage(NftTokenMintService.getConnectedUserNft(account));
-  }, []);
+  }, [account]);
 
   useEffect(() => {
     if (lastMessage != null) {
@@ -30,10 +33,45 @@ const IndexView: React.FC = ({}) => {
     }
   }, [lastMessage]);
 
+  useEffect(() => {
+    const nfts: Nft[] = [];
+
+    RedisService.getAllUserWithNftIds().then(async (res) => {
+      delete res[account];
+      console.log(res);
+      for (const key in res) {
+        console.log(key, "KEY");
+        for (const nftId of res[key]) {
+          console.log(nftId, "NFT ID IN KEY KEY");
+
+          const nft = await NftTokenMintService.getNftById(nftId);
+          if (nft) {
+            const nftToAdd: Nft = {
+              Flags: nft.flags,
+              Issuer: nft.issuer,
+              NFTokenID: nft.nft_id,
+              URI: NftTokenMintService.convertURIToPinataURL(nft.uri),
+              nft_serial: nft.nft_serial,
+              TransferFee: nft.transfer_fee,
+            };
+
+            nfts.push(nftToAdd);
+          }
+        }
+      }
+
+      setOthersNfts(() => [...nfts]);
+    });
+  }, [account]);
+
   return (
     <div style={{ padding: 20 }}>
-      <MyNfts nfts={nfts} />
+      <Text fontSize="3xl" as="b">
+        {APP_TEXTS.myNft} ({nfts.length})
+      </Text>
+      <MyNfts nfts={nfts} key={"1"} />
       <DiscoverOtherNft />
+      <MyNfts nfts={othersNfts} key={"2"} />
     </div>
   );
 };

@@ -63,9 +63,6 @@ const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
 const MyNfts: React.FC<MyNftsProps> = ({ nfts }) => {
   return (
     <div>
-      <Text fontSize="3xl" as="b">
-        {APP_TEXTS.myNft} ({nfts.length})
-      </Text>
       <Stack
         direction={["column", "row"]}
         spacing="6"
@@ -79,5 +76,7 @@ const MyNfts: React.FC<MyNftsProps> = ({ nfts }) => {
     </div>
   );
 };
+
+export { NftView };
 
 export default MyNfts;

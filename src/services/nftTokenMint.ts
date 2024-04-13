@@ -1,5 +1,10 @@
 import { convertHexToString, convertStringToHex } from "xrpl";
-import { MemoType, Nft, NftCreatedType } from "../utils/types";
+import {
+  MemoType,
+  Nft,
+  NftCreatedType,
+  QuickNodeNftResponse,
+} from "../utils/types";
 import axios from "axios";
 
 class NftTokenMintService {
@@ -65,30 +70,37 @@ class NftTokenMintService {
     });
   }
 
-  static async getNftById(id: string) {
-    console.log(import.meta.env.VITE_JSON_RPC_URL);
-    const result = await axios.post(
-      "https://smart-few-patron.xrp-testnet.quiknode.pro/4c8681a57440231b6ee6bcd14aa6472eb04c7b2f/",
-      {
-        method: "nft_info",
-        params: [
-          {
-            nft_id: id,
-          },
-        ],
-      },
-      {
-        headers: {
-          "Content-Type": "application/json",
+  static async getNftById(
+    id: string
+  ): Promise<QuickNodeNftResponse | undefined> {
+    try {
+      const result = await axios.post(
+        "https://smart-few-patron.xrp-testnet.quiknode.pro/4c8681a57440231b6ee6bcd14aa6472eb04c7b2f/",
+        {
+          method: "nft_info",
+          params: [
+            {
+              nft_id: id,
+            },
+          ],
         },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log("NFT BY ID", result.data);
+      if (result.status !== 200) {
+        return undefined;
+        // result.json().then((data) => {
+        //   console.log(JSON.parse(data));
+        // });
       }
-    );
-    console.log("NFT BY ID", result.data);
-    if (result.status !== 200) {
-      console.log(result.data);
-      // result.json().then((data) => {
-      //   console.log(JSON.parse(data));
-      // });
+      return result.data.result;
+    } catch (error) {
+      console.error(error);
+      return undefined;
     }
   }
 
@@ -105,6 +117,10 @@ class NftTokenMintService {
           import.meta.env.VITE_GATEWAY_PINATA_URL + convertHexToString(nft.URI),
       };
     });
+  }
+
+  static convertURIToPinataURL(uri: string): string {
+    return import.meta.env.VITE_GATEWAY_PINATA_URL + convertHexToString(uri);
   }
 }
 

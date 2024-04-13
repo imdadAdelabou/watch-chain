@@ -55,7 +55,9 @@ const LandingPage: React.FC = () => {
             label={APP_TEXTS.connectWithXumm}
             icon={XummIcon}
             onClick={() => {
-              XummAuth.login(dispatch);
+              XummAuth.login(dispatch).then(() => {
+                onClose();
+              });
             }}
           />
         </>

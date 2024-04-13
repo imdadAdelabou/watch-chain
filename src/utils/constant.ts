@@ -45,8 +45,8 @@ const navBarItems = [
   { name: "Home", path: "/" },
   { name: "Marketplace", path: "/marketplace" },
   { name: "Mint", path: "/mint" },
-  { name: "Legal", path: "/legal" },
-  { name: "Support", path: "/support" },
+  // { name: "Legal", path: "/legal" },
+  // { name: "Support", path: "/support" },
 ];
 
 const watchCasesTypes = [

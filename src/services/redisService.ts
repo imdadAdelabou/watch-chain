@@ -1,4 +1,5 @@
 import axios from "axios";
+import { UserWithftIdsType } from "../utils/types";
 
 class RedisService {
   static async addNftIdToUser(
@@ -19,6 +20,31 @@ class RedisService {
     } catch (error) {
       console.error(error);
       return false;
+    }
+  }
+
+  static async getAllUserWithNftIds(): Promise<UserWithftIdsType> {
+    try {
+      const result = await axios.get(
+        `${import.meta.env.VITE_SERVER_API_URL}/get-user-with-nft-ids`
+      );
+      if (result.status === 200) {
+        const dataToReturn: UserWithftIdsType = {};
+        const userWithNftIds = result.data["userWithNftIds"];
+        if (Object.keys(userWithNftIds).length === 0) {
+          return {};
+        }
+
+        for (const key in userWithNftIds) {
+          dataToReturn[key] = userWithNftIds[key].split(",");
+        }
+        return dataToReturn;
+      }
+
+      return {};
+    } catch (error) {
+      console.error(error);
+      return {};
     }
   }
 }
