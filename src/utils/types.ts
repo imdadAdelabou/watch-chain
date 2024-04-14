@@ -106,3 +106,25 @@ export interface QuickNodeNftResponse {
 
   flags: number;
 }
+
+export interface ResolvedType {
+  uid: string;
+  data: {
+    signed: boolean;
+    txid: string;
+    user_token: boolean;
+  };
+  payload: {
+    response: {
+      txid: string;
+    };
+  };
+}
+export interface SetNftPriceModalProps {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  inputPlaceHolder: string;
+  handleOnClickButton: () => void;
+  getCurrentValue: (value: string) => void;
+}

@@ -1,5 +1,19 @@
+interface watchType {
+  name: string;
+  brand: string;
+  watchCase: string;
+  wristBand: string;
+  watchDial: string;
+  watchIndex: string;
+  watchMovment: string;
+  waterProof: string;
+  description: string;
+  transferFee: number;
+  imagePath: string;
+}
+
 describe("Test the minting process", () => {
-  let watchDetails = {};
+  let watchDetails: watchType;
 
   beforeEach(() => {
     watchDetails = {
@@ -13,6 +27,7 @@ describe("Test the minting process", () => {
       waterProof: "100m",
       description: "A watch that will make you feel like a king",
       transferFee: 20,
+      imagePath: "cypressTestsFile/pathNarutoUltim.jpeg",
     };
     cy.visit("http://localhost:5173");
   });
@@ -55,5 +70,11 @@ describe("Test the minting process", () => {
     const nftElmDescription = cy.get('[data-test-id="nft-description-input"]');
     nftElmDescription.should("be.visible");
     nftElmDescription.type(watchDetails.description);
+    const mintButtonElm = cy.get('[data-test-id="mint-button"]');
+    mintButtonElm.should("be.visible");
+    mintButtonElm.click();
+    const nftImageFileInputElm = cy.get('[data-test-id="nft-image-input"]');
+    nftImageFileInputElm.should("be.visible");
+    nftImageFileInputElm.first().selectFile(watchDetails.imagePath);
   });
 });

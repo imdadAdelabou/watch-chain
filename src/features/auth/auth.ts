@@ -3,6 +3,7 @@ import {
   MemoType,
   NFTokenAcceptOfferType,
   NFTokenCreateSellOfferType,
+  ResolvedType,
   User,
 } from "../../utils/types";
 import { AppDispatch } from "../../store";
@@ -41,7 +42,7 @@ class XummAuth extends Auth {
     setUrl: (url: string | undefined) => void,
     setPayloadQr: (url: string | undefined) => void,
     setModalIsOpen: (value: boolean) => void,
-    getResolvedValue: (value: unknown | undefined) => void
+    getResolvedValue: (value: ResolvedType | undefined) => void
   ) {
     const nftPayload = new NftTokenMintService(
       account,
@@ -72,7 +73,7 @@ class XummAuth extends Auth {
     );
     console.log("Payload QR:", result?.created.refs.qr_png);
 
-    const payload = await result?.resolved;
+    const payload = (await result?.resolved) as ResolvedType;
 
     setUrl(undefined);
     setPayloadQr(undefined);
@@ -91,7 +92,7 @@ class XummAuth extends Auth {
     setUrl: (url: string | undefined) => void,
     setPayloadQr: (url: string | undefined) => void,
     setModalIsOpen: (value: boolean) => void,
-    getResolvedValue: (value: unknown | undefined) => void
+    getResolvedValue: (value: ResolvedType | undefined) => void
   ) {
     const result = await this._xumm?.payload?.createAndSubscribe(
       NFTCreateOffer.createNFTokenSellOfferPayload(data),
@@ -114,7 +115,8 @@ class XummAuth extends Auth {
     );
     console.log("Payload QR:", result?.created.refs.qr_png);
 
-    const payload = await result?.resolved;
+    //Typed the resolved value
+    const payload = (await result?.resolved) as ResolvedType;
     setUrl(undefined);
     setPayloadQr(undefined);
     setModalIsOpen(false);
@@ -128,7 +130,7 @@ class XummAuth extends Auth {
     setUrl: (url: string | undefined) => void,
     setPayloadQr: (url: string | undefined) => void,
     setModalIsOpen: (value: boolean) => void,
-    getResolvedValue: (value: unknown | undefined) => void
+    getResolvedValue: (value: ResolvedType | undefined) => void
   ) {
     const result = await this._xumm?.payload?.createAndSubscribe(
       NFTCreateOffer.createAcceptSellOffer(data.Account, data.NFTokenSellOffer),
@@ -151,13 +153,13 @@ class XummAuth extends Auth {
     );
     console.log("Payload QR:", result?.created.refs.qr_png);
 
-    const payload = await result?.resolved;
+    const resolved = (await result?.resolved) as ResolvedType;
     setUrl(undefined);
     setPayloadQr(undefined);
     setModalIsOpen(false);
-    getResolvedValue(payload);
+    getResolvedValue(resolved);
 
-    console.log("Resolved", payload);
+    console.log("Resolved", resolved);
   }
 }
 

@@ -1,28 +1,23 @@
-import {
-  Button,
-  Img,
-  NumberInput,
-  NumberInputField,
-  useToast,
-} from "@chakra-ui/react";
+import { Button, Img, useToast } from "@chakra-ui/react";
 import React, { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import Ipfs from "../services/ipfs";
-import XummAuth from "../features/auth/auth";
+import Ipfs from "../../services/ipfs";
+import XummAuth from "../../features/auth/auth";
 import {
   MetaDataEntryType,
   NftOfferType,
   OptionWatchType,
   PinataPinnedFileType,
-} from "../utils/types";
-import { APP_TEXTS, socketUrl } from "../utils/constant";
+} from "../../utils/types";
+import { APP_TEXTS, socketUrl } from "../../utils/constant";
 import { useSelector } from "react-redux";
-import { RootState } from "../store";
-import CustomModal from "../components/CustomModal";
-import QrXummModal from "../components/QrXummModal";
+import { RootState } from "../../store";
+import CustomModal from "../../components/CustomModal";
+import QrXummModal from "../../components/QrXummModal";
 import useWebSocket from "react-use-websocket";
-import NFTCreateOffer from "../services/nftCreateOffer";
-import RedisService from "../services/redisService";
+import NFTCreateOffer from "../../services/nftCreateOffer";
+import RedisService from "../../services/redisService";
+import SetNftPriceModal from "./SetNftPriceModal";
 
 function useQuery() {
   const { search } = useLocation();
@@ -179,18 +174,23 @@ const NftPage: React.FC = () => {
         setIsModalOpen(modalIsOpen);
       },
       (resolved) => {
-        if ((resolved as any).data.signed) {
-          RedisService.removeNftIdFromUser(offers!.owner, nftTokenId, account!);
-          toast({
-            position: "top-right",
-            title: APP_TEXTS.buyOfferSuccess,
-            description: APP_TEXTS.tsxSuccess,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
+        if (resolved) {
+          if (resolved.data.signed) {
+            RedisService.removeNftIdFromUser(
+              offers!.owner,
+              nftTokenId,
+              account!
+            );
+            toast({
+              position: "top-right",
+              title: APP_TEXTS.buyOfferSuccess,
+              description: APP_TEXTS.tsxSuccess,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
         }
-        console.log(resolved);
       }
     ).then(() => {
       setAcceptSellIsLoading(false);
@@ -246,69 +246,52 @@ const NftPage: React.FC = () => {
       </div>
 
       {/* Price setting modal */}
-      <CustomModal
+      <SetNftPriceModal
         title={APP_TEXTS.setPriceNft}
         isOpen={pricingModalOpen}
         onClose={() => setPricingModalOpen(false)}
-      >
-        <div>
-          <NumberInput
-            onChange={(value) => setAmount(value)}
-            value={amount}
-            data-test-id="nft-set-price-input"
-          >
-            <NumberInputField placeholder={APP_TEXTS.priceLabel} />
-          </NumberInput>
-
-          <Button
-            marginTop="8"
-            marginBottom="3"
-            colorScheme="blue"
-            display="block"
-            marginX="auto"
-            onClick={() => {
-              setPricingModalOpen(false);
-              if (amount.length > 0) {
-                setIsLoading(true);
-                XummAuth.createAndSubscribeToNftSellOffer(
-                  {
-                    Account: account,
-                    Amount: amount,
-                    Flags: 1,
-                    NFTokenID: nftTokenId,
-                  },
-                  (url) => {
-                    setPayloadURL(url);
-                  },
-                  (qr) => {
-                    setPayloadQR(qr);
-                  },
-                  (modalIsOpen) => {
-                    setIsModalOpen(modalIsOpen);
-                  },
-                  (resolved) => {
-                    if ((resolved as any).data.signed) {
-                      toast({
-                        position: "top-right",
-                        title: APP_TEXTS.sellOfferSuccess,
-                        description: APP_TEXTS.tsxSuccess,
-                        status: "success",
-                        duration: 9000,
-                        isClosable: true,
-                      });
-                    }
-                    console.log(resolved);
+        getCurrentValue={(value) => setAmount(value)}
+        inputPlaceHolder={APP_TEXTS.priceLabel}
+        handleOnClickButton={() => {
+          setPricingModalOpen(false);
+          if (amount.length > 0) {
+            setIsLoading(true);
+            XummAuth.createAndSubscribeToNftSellOffer(
+              {
+                Account: account,
+                Amount: amount,
+                Flags: 1,
+                NFTokenID: nftTokenId,
+              },
+              (url) => {
+                setPayloadURL(url);
+              },
+              (qr) => {
+                setPayloadQR(qr);
+              },
+              (modalIsOpen) => {
+                setIsModalOpen(modalIsOpen);
+              },
+              (resolved) => {
+                if (resolved) {
+                  if (resolved.data.signed) {
+                    toast({
+                      position: "top-right",
+                      title: APP_TEXTS.sellOfferSuccess,
+                      description: APP_TEXTS.tsxSuccess,
+                      status: "success",
+                      duration: 9000,
+                      isClosable: true,
+                    });
                   }
-                ).then(() => {
-                  setIsLoading(false);
-                });
+                }
               }
-            }}
-          >
-            Set Price
-          </Button>
-        </div>
-      </CustomModal>
+            ).then(() => {
+              setIsLoading(false);
+            });
+          }
+        }}
+      />
 
       <CustomModal
         isOpen={isModalOpen}

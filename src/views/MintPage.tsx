@@ -103,38 +103,43 @@ const MintPage: React.FC = ({}) => {
         (qr) => setPayloadQR(qr),
         (modalIsOpen) => setIsModalOpen(modalIsOpen),
         (resolved) => {
-          const tixid = (resolved as any).payload.response.txid;
-          console.log(tixid, "TXID");
-          if ((resolved as any).data.signed) {
-            axios
-              .post(`${import.meta.env.VITE_SERVER_API_URL}/transaction-info`, {
-                tixid: tixid,
-              })
-              .then((res) => {
-                console.log("Transaction info: ", res.data);
-                RedisService.addNftIdToUser(
-                  account,
-                  res.data.data.result.meta.nftoken_id
-                );
+          if (resolved) {
+            const tixid = resolved.payload.response.txid;
+            console.log(tixid, "TXID");
+            if (resolved.data.signed) {
+              axios
+                .post(
+                  `${import.meta.env.VITE_SERVER_API_URL}/transaction-info`,
+                  {
+                    tixid: tixid,
+                  }
+                )
+                .then((res) => {
+                  console.log("Transaction info: ", res.data);
+                  RedisService.addNftIdToUser(
+                    account,
+                    res.data.data.result.meta.nftoken_id
+                  );
+                });
+              toast({
+                position: "top-right",
+                title: APP_TEXTS.nftMintSuccess,
+                description: APP_TEXTS.tsxSuccess,
+                status: "success",
+                duration: 9000,
+                isClosable: true,
               });
-            toast({
-              position: "top-right",
-              title: APP_TEXTS.nftMintSuccess,
-              description: APP_TEXTS.tsxSuccess,
-              status: "success",
-              duration: 9000,
-              isClosable: true,
-            });
-            navigate("/");
-          } else {
-            toast({
-              position: "top-right",
-              title: APP_TEXTS.errorLabel,
-              description: APP_TEXTS.errorOccuredWhileMinting,
-              status: "error",
-              duration: 9000,
-              isClosable: true,
-            });
+              navigate("/");
+            } else {
+              toast({
+                position: "top-right",
+                title: APP_TEXTS.errorLabel,
+                description: APP_TEXTS.errorOccuredWhileMinting,
+                status: "error",
+                duration: 9000,
+                isClosable: true,
+              });
+            }
           }
         }
       );
@@ -238,6 +243,7 @@ const MintPage: React.FC = ({}) => {
             accept="image/*"
             maxFileSize={1000000}
             onSelect={onSelectHandle}
+            data-test-id="nft-image-input"
           />
         </div>
         <Button
@@ -245,6 +251,7 @@ const MintPage: React.FC = ({}) => {
           color="white"
           marginTop="20px"
           onClick={userIsConnected() ? () => handleMint() : () => {}}
+          data-test-id="mint-button"
           isLoading={loading}
         >
           {APP_TEXTS.mintLabel}
