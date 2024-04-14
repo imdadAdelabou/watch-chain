@@ -106,3 +106,17 @@ export interface QuickNodeNftResponse {
 
   flags: number;
 }
+
+export interface ResolvedType {
+  uid: string;
+  data: {
+    signed: boolean;
+    txid: string;
+    user_token: boolean;
+  };
+  payload: {
+    response: {
+      txid: string;
+    };
+  };
+}

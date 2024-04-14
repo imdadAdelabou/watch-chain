@@ -179,18 +179,23 @@ const NftPage: React.FC = () => {
         setIsModalOpen(modalIsOpen);
       },
       (resolved) => {
-        if ((resolved as any).data.signed) {
-          RedisService.removeNftIdFromUser(offers!.owner, nftTokenId, account!);
-          toast({
-            position: "top-right",
-            title: APP_TEXTS.buyOfferSuccess,
-            description: APP_TEXTS.tsxSuccess,
-            status: "success",
-            duration: 9000,
-            isClosable: true,
-          });
+        if (resolved) {
+          if (resolved.data.signed) {
+            RedisService.removeNftIdFromUser(
+              offers!.owner,
+              nftTokenId,
+              account!
+            );
+            toast({
+              position: "top-right",
+              title: APP_TEXTS.buyOfferSuccess,
+              description: APP_TEXTS.tsxSuccess,
+              status: "success",
+              duration: 9000,
+              isClosable: true,
+            });
+          }
         }
-        console.log(resolved);
       }
     ).then(() => {
       setAcceptSellIsLoading(false);
@@ -287,17 +292,18 @@ const NftPage: React.FC = () => {
                     setIsModalOpen(modalIsOpen);
                   },
                   (resolved) => {
-                    if ((resolved as any).data.signed) {
-                      toast({
-                        position: "top-right",
-                        title: APP_TEXTS.sellOfferSuccess,
-                        description: APP_TEXTS.tsxSuccess,
-                        status: "success",
-                        duration: 9000,
-                        isClosable: true,
-                      });
+                    if (resolved) {
+                      if (resolved.data.signed) {
+                        toast({
+                          position: "top-right",
+                          title: APP_TEXTS.sellOfferSuccess,
+                          description: APP_TEXTS.tsxSuccess,
+                          status: "success",
+                          duration: 9000,
+                          isClosable: true,
+                        });
+                      }
                     }
-                    console.log(resolved);
                   }
                 ).then(() => {
                   setIsLoading(false);
@@ -305,7 +311,7 @@ const NftPage: React.FC = () => {
               }
             }}
           >
-            Set Price
+            {APP_TEXTS.setPrice}
           </Button>
         </div>
       </CustomModal>
