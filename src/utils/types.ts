@@ -120,3 +120,11 @@ export interface ResolvedType {
     };
   };
 }
+export interface SetNftPriceModalProps {
+  title: string;
+  isOpen: boolean;
+  onClose: () => void;
+  inputPlaceHolder: string;
+  handleOnClickButton: () => void;
+  getCurrentValue: (value: string) => void;
+}
