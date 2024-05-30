@@ -9,6 +9,7 @@ import { APP_TEXTS, socketUrl } from "../../utils/constant";
 import DiscoverOtherNft from "./DiscoverOtherNft";
 import RedisService from "../../services/redisService";
 import { Text } from "@chakra-ui/react";
+import Hero from "./hero/Hero";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
@@ -69,6 +70,7 @@ const IndexView: React.FC = ({}) => {
 
   return (
     <div style={{ padding: 20 }}>
+      <Hero />
       <Text fontSize="3xl" as="b">
         {APP_TEXTS.myNft} ({nfts.length})
       </Text>

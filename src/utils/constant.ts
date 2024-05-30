@@ -40,6 +40,12 @@ const APP_TEXTS = {
   youOwnThisNftAndHaveSetAOffers: "You own this NFT and have set a sell offer",
   acceptOffer: "Accept offer",
   setPrice: "Set price",
+  heroTitle: "Discover, Create & Collect luxury watches NFTs",
+  subHeroDescription: "Watches NFT Marketplace. Create, buy and sell luxury watches NFTs on the XRPL blockchain.",
+  getStartedBtnText: "Get Started",
+  totalSales: 'Total Sales',
+  totalNfts: 'Total NFTs',
+  artistsLabel: 'Total Artists',
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
 };

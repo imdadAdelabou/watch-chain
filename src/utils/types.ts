@@ -128,3 +128,8 @@ export interface SetNftPriceModalProps {
   handleOnClickButton: () => void;
   getCurrentValue: (value: string) => void;
 }
+
+export interface GetStartedBtnProps {
+  width: string;
+  height: string;
+}
