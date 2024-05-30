@@ -129,7 +129,15 @@ export interface SetNftPriceModalProps {
   getCurrentValue: (value: string) => void;
 }
 
+
+// Props
+
 export interface GetStartedBtnProps {
   width: string;
   height: string;
+}
+
+export interface StatsProps {
+  label: string;
+  value: number;
 }

@@ -1,10 +1,6 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
-
-interface StatsProps {
-  label: string;
-  value: number;
-}
+import { StatsProps } from "../../../utils/types";
 
 const Stats: React.FC<StatsProps> = ({ label, value }) => {
   return (
