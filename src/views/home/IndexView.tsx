@@ -8,8 +8,9 @@ import MyNfts from "../../components/MyNfts";
 import { APP_TEXTS, socketUrl } from "../../utils/constant";
 import DiscoverOtherNft from "./DiscoverOtherNft";
 import RedisService from "../../services/redisService";
-import { Text } from "@chakra-ui/react";
+import { Text, Box } from "@chakra-ui/react";
 import Hero from "./hero/Hero";
+import HowItWorks from "./howItWorks/HowItWorks";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
@@ -71,12 +72,12 @@ const IndexView: React.FC = ({}) => {
   return (
     <div style={{ padding: 20 }}>
       <Hero />
-      <Text fontSize="3xl" as="b">
-        {APP_TEXTS.myNft} ({nfts.length})
-      </Text>
-      <MyNfts nfts={nfts} />
-      <DiscoverOtherNft />
-      <MyNfts nfts={othersNfts} />
+      <Box paddingX={["20px", "150px"]}>
+        <MyNfts nfts={nfts} />
+        <DiscoverOtherNft />
+        <MyNfts nfts={othersNfts} />
+        <HowItWorks />
+      </Box>
     </div>
   );
 };

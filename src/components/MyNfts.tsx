@@ -5,6 +5,7 @@ import { MyNftsProps, Nft, PinataPinnedFileType } from "../utils/types";
 import { WatchChainIconWithoutBg } from "../assets";
 import { useNavigate } from "react-router-dom";
 import Ipfs from "../services/ipfs";
+import TitleSection from "./landingPage/TitleSection";
 
 const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
   const naigate = useNavigate();
@@ -79,6 +80,7 @@ const NftView: React.FC<Nft> = ({ URI, TransferFee, Issuer, NFTokenID }) => {
 const MyNfts: React.FC<MyNftsProps> = ({ nfts }) => {
   return (
     <div>
+      <TitleSection title={`${APP_TEXTS.myNft} (${nfts.length})`} />
       <Stack
         direction={["column", "row"]}
         spacing="6"
