@@ -47,6 +47,13 @@ const APP_TEXTS = {
   totalNfts: 'Total NFTs',
   artistsLabel: 'Total Artists',
   howItWorks: 'How it works',
+  howItWorksSubDescription: 'Find out how to get started',
+  setupWallet: 'Setup Your wallet',
+  setupWalletDescription: 'Set up your Xumm wallet. Connect it to the Watch Chain by clicking the Sign In btn in the top right corner.',
+  createYourNFT: 'Create NFT',
+  createYourNFTDescription: 'Create your own luxury watch NFT. Set the price and sell it on the marketplace.',
+  startEarning: 'Start Earning',
+  startEarningDescription: 'Choose between auctions and fixed-price listings. Start earning by selling your NFTs or trading others.',
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
 };

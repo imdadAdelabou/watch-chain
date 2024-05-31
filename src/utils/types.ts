@@ -141,3 +141,9 @@ export interface StatsProps {
   label: string;
   value: number;
 }
+
+export interface TitleSectionProps {
+  title: string;
+}
+
+export interface SubDescriptionProps extends TitleSectionProps { }

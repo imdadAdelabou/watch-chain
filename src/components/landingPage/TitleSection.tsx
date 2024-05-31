@@ -1,9 +1,6 @@
 import React from "react";
 import { Text } from "@chakra-ui/react";
-
-interface TitleSectionProps {
-  title: string;
-}
+import { TitleSectionProps } from "../../utils/types";
 
 const TitleSection: React.FC<TitleSectionProps> = ({ title }) => {
   return (

@@ -5,10 +5,10 @@ import { Nft } from "../../utils/types";
 import useWebSocket from "react-use-websocket";
 import NftTokenMintService from "../../services/nftTokenMint";
 import MyNfts from "../../components/MyNfts";
-import { APP_TEXTS, socketUrl } from "../../utils/constant";
+import { socketUrl } from "../../utils/constant";
 import DiscoverOtherNft from "./DiscoverOtherNft";
 import RedisService from "../../services/redisService";
-import { Text, Box } from "@chakra-ui/react";
+import { Box } from "@chakra-ui/react";
 import Hero from "./hero/Hero";
 import HowItWorks from "./howItWorks/HowItWorks";
 
