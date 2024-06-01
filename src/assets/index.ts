@@ -5,5 +5,6 @@ import RocketLaunchIcon from "./icons/rocketLaunch.svg";
 import WallectIcon from "./icons/infos/WalletIcon.svg";
 import StartEarning from "./icons/infos/StartEarningIcon.svg";
 import CollectionIcon from "./icons/infos/CollectionIcon.svg";
+import CreatorPlaceHolder from "./icons/CreatorPlaceHolder.png";
 
-export { MetaMaskicon, XummIcon, WatchChainIconWithoutBg, RocketLaunchIcon, WallectIcon, StartEarning, CollectionIcon };
+export { MetaMaskicon, XummIcon, WatchChainIconWithoutBg, RocketLaunchIcon, WallectIcon, StartEarning, CollectionIcon, CreatorPlaceHolder };

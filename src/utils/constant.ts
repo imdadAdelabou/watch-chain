@@ -43,7 +43,7 @@ const APP_TEXTS = {
   heroTitle: "Discover, Create & Collect luxury watches NFTs",
   subHeroDescription: "Watches NFT Marketplace. Create, buy and sell luxury watches NFTs on the XRPL blockchain.",
   getStartedBtnText: "Get Started",
-  totalSales: 'Total Sales',
+  totalSales: 'Total Sales:',
   totalNfts: 'Total NFTs',
   artistsLabel: 'Total Artists',
   howItWorks: 'How it works',
@@ -55,6 +55,7 @@ const APP_TEXTS = {
   startEarning: 'Start Earning',
   startEarningDescription: 'Choose between auctions and fixed-price listings. Start earning by selling your NFTs or trading others.',
   topCreators: 'Top Creators',
+  currency: 'XRP',
   topCreatorsDescription: 'Checkout Top Rated Creators on the NFT Marketplace.',
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
