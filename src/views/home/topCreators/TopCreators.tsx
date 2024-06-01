@@ -2,24 +2,31 @@ import React from "react";
 import TitleSection from "../../../components/landingPage/TitleSection";
 import { APP_TEXTS } from "../../../utils/constant";
 import SubDescriptionSection from "../../../components/landingPage/SubDescriptionSection";
-import { Box, HStack, Image, Text } from "@chakra-ui/react";
+import { Box, Image, Text } from "@chakra-ui/react";
 import { CreatorPlaceHolder } from "../../../assets";
 
 interface CreatorCardProps {
   name: string;
   totalSales: number;
+  rank: number;
 }
 
 export const CreatorCard: React.FC<CreatorCardProps> = ({
   name,
   totalSales,
+  rank,
 }) => {
   return (
     <Box className="flex gap-[20px] lg:block  bg-[#3B3B3B] rounded-[20px] pt-[20px] px-[20px] pb-[20px] lg:px-[20px] lg:pt-[18px] lg:pb-[20px]">
-      <Image
-        src={CreatorPlaceHolder}
-        className="rounded-full w-[60px] h-[60px] lg:w-[110px] lg:h-[120px] lg:m-auto"
-      />
+      <div className="relative">
+        <div className="text-[16px] leading-[140%] w-[30px] h-[30px] bg-[#2B2B2B] text-[#858584] rounded-full flex justify-center items-center absolute top-[-8px] left-[-8px]">
+          {rank}
+        </div>
+        <Image
+          src={CreatorPlaceHolder}
+          className="rounded-full w-[60px] h-[60px] lg:w-[110px] lg:h-[120px] lg:m-auto"
+        />
+      </div>
       <div>
         <Text
           as="h3"
@@ -56,7 +63,12 @@ const TopCreators: React.FC = () => {
       <SubDescriptionSection title={APP_TEXTS.topCreatorsDescription} />
       <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-[20px] gap-[20px] md:gap-[30px] lg:gap-[30px]">
         {Array.from({ length: 8 }).map((_, index) => (
-          <CreatorCard key={index} name="RustyRobot" totalSales={34.53} />
+          <CreatorCard
+            key={index}
+            name="RustyRobot"
+            totalSales={34.53}
+            rank={index + 1}
+          />
         ))}
       </div>
     </div>
