@@ -54,6 +54,8 @@ const APP_TEXTS = {
   createYourNFTDescription: 'Create your own luxury watch NFT. Set the price and sell it on the marketplace.',
   startEarning: 'Start Earning',
   startEarningDescription: 'Choose between auctions and fixed-price listings. Start earning by selling your NFTs or trading others.',
+  topCreators: 'Top Creators',
+  topCreatorsDescription: 'Checkout Top Rated Creators on the NFT Marketplace.',
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
 };

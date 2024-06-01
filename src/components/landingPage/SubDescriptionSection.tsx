@@ -7,7 +7,7 @@ const SubDescriptionSection: React.FC<SubDescriptionProps> = ({ title }) => {
     <Text
       fontSize="22px"
       lineHeight="160%"
-      fontFamily="Work-sans"
+      fontFamily="Work sans"
       fontWeight="400"
     >
       {title}

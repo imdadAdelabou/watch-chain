@@ -57,6 +57,7 @@ const InfoCard: React.FC<InfoCardProps> = ({ icon, title, description }) => {
           fontSize={["12px", "12px", "16px"]}
           lineHeight="140%"
           textAlign={["left", "center", "center"]}
+          fontWeight="Work sans"
         >
           {description}
         </Text>

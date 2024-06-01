@@ -11,6 +11,7 @@ import RedisService from "../../services/redisService";
 import { Box } from "@chakra-ui/react";
 import Hero from "./hero/Hero";
 import HowItWorks from "./howItWorks/HowItWorks";
+import TopCreators from "./topCreators/TopCreators";
 
 const IndexView: React.FC = ({}) => {
   const account = useSelector((state: RootState) => state.user.me?.account);
@@ -73,6 +74,7 @@ const IndexView: React.FC = ({}) => {
     <div style={{ padding: 20 }}>
       <Hero />
       <Box paddingX={["20px", "150px"]}>
+        <TopCreators />
         <MyNfts nfts={nfts} />
         <DiscoverOtherNft />
         <MyNfts nfts={othersNfts} />
