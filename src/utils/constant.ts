@@ -36,6 +36,7 @@ const APP_TEXTS = {
   buy: "Place a bid",
   setPriceNft: "Set the price of the NFT",
   priceLabel: "Price",
+  highestBid: "Highest bid",
   discoverOtherNft: "Discover More NFTs",
   discoverOtherNftDescription: "Explore new trending NFTs",
   youOwnThisNftAndHaveSetAOffers: "You own this NFT and have set a sell offer",
