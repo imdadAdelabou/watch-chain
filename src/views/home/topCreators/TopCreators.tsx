@@ -1,20 +1,16 @@
-import React from "react";
+import React, { useEffect } from "react";
 import TitleSection from "../../../components/landingPage/TitleSection";
 import { APP_TEXTS } from "../../../utils/constant";
 import SubDescriptionSection from "../../../components/landingPage/SubDescriptionSection";
 import { Box, Image, Text } from "@chakra-ui/react";
-import { CreatorPlaceHolder } from "../../../assets";
-
-interface CreatorCardProps {
-  name: string;
-  totalSales: number;
-  rank: number;
-}
+import { CreatorCardProps } from "../../../utils/types";
+import { XummAuthStatic } from "../../../features/auth/auth";
 
 export const CreatorCard: React.FC<CreatorCardProps> = ({
   name,
   totalSales,
   rank,
+  avatar,
 }) => {
   return (
     <Box className="flex gap-[20px] lg:block  bg-[#3B3B3B] rounded-[20px] pt-[20px] px-[20px] pb-[20px] lg:px-[20px] lg:pt-[18px] lg:pb-[20px]">
@@ -23,7 +19,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
           {rank}
         </div>
         <Image
-          src={CreatorPlaceHolder}
+          src={avatar}
           className="rounded-full w-[60px] h-[60px] lg:w-[110px] lg:h-[120px] lg:m-auto"
         />
       </div>
@@ -57,17 +53,28 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
 };
 
 const TopCreators: React.FC = () => {
+  const [creators, setCreators] = React.useState<CreatorCardProps[]>([]);
+
+  useEffect(() => {
+    const getTopCreatorsProfile = async () => {
+      const result = await XummAuthStatic.getTopCreatorsProfile();
+      setCreators(result);
+    };
+    getTopCreatorsProfile();
+  }, []);
+
   return (
     <div>
       <TitleSection title={APP_TEXTS.topCreators} />
       <SubDescriptionSection title={APP_TEXTS.topCreatorsDescription} />
       <div className="grid md:grid-cols-2 lg:grid-cols-4 mt-[20px] gap-[20px] md:gap-[30px] lg:gap-[30px]">
-        {Array.from({ length: 8 }).map((_, index) => (
+        {creators.map((creator, index) => (
           <CreatorCard
             key={index}
-            name="RustyRobot"
-            totalSales={34.53}
-            rank={index + 1}
+            name={creator.name}
+            totalSales={creator.totalSales}
+            rank={creator.rank}
+            avatar={creator.avatar}
           />
         ))}
       </div>

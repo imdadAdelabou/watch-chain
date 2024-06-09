@@ -55,8 +55,7 @@ class RedisService {
   ): Promise<boolean> {
     try {
       const result = await axios.post(
-        `${
-          import.meta.env.VITE_SERVER_API_URL
+        `${import.meta.env.VITE_SERVER_API_URL
         }/remove-nft-id-from-user-and-set-new-user-with-removed-id`,
         {
           userId: owner,
@@ -74,4 +73,33 @@ class RedisService {
   }
 }
 
+class UserAccount extends RedisService {
+  static async addNewUserAccountAddress(address: string): Promise<void> {
+    try {
+      await axios.post(
+        `${import.meta.env.VITE_SERVER_API_URL}/user-account/add-new-user-account-address`,
+        {
+          address
+        }
+      );
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  static async getAllUserAccountAddresses(): Promise<string[]> {
+    try {
+      const result = await axios.get(
+        `${import.meta.env.VITE_SERVER_API_URL}/user-account/get-all-user-account-addresses`
+      );
+
+      return result.data['userAddresses'];
+    } catch (error) {
+      console.error(error);
+      return [];
+    }
+  }
+}
+
+export { UserAccount };
 export default RedisService;

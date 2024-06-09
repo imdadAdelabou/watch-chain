@@ -1,4 +1,4 @@
-// import React, { useEffect } from "react";
+import React, { Suspense } from "react";
 // import { RootState } from "../../store";
 // import { useSelector } from "react-redux";
 // import { Nft } from "../../utils/types";
@@ -6,12 +6,15 @@
 // import NftTokenMintService from "../../services/nftTokenMint";
 // import MyNfts from "../../components/MyNfts";
 // import { socketUrl } from "../../utils/constant";
-import DiscoverOtherNft from "./DiscoverOtherNft";
+
+/// Todo: fill the component with a Suspense component
+const DiscoverOtherNft = React.lazy(() => import("./DiscoverOtherNft"));
 // import RedisService from "../../services/redisService";
 import { Box } from "@chakra-ui/react";
 import Hero from "./hero/Hero";
 import HowItWorks from "./howItWorks/HowItWorks";
-import TopCreators from "./topCreators/TopCreators";
+
+const TopCreators = React.lazy(() => import("./topCreators/TopCreators"));
 
 const IndexView: React.FC = ({}) => {
   // const account = useSelector((state: RootState) => state.user.me?.account);
@@ -74,10 +77,14 @@ const IndexView: React.FC = ({}) => {
     <div style={{ padding: 20 }}>
       <Hero />
       <Box paddingX={["20px", "150px"]}>
-        <TopCreators />
+        <Suspense fallback={<h1>Loading</h1>}>
+          <TopCreators />
+        </Suspense>
         {/* <MyNfts nfts={nfts} /> */}
         <div className="spacer mt-[80px]"></div>
-        <DiscoverOtherNft />
+        <Suspense fallback={<h1>Loading</h1>}>
+          <DiscoverOtherNft />
+        </Suspense>
         {/* <MyNfts nfts={othersNfts} /> */}
         <div className="spacer mt-[80px]"></div>
         <HowItWorks />

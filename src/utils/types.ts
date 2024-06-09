@@ -147,3 +147,21 @@ export interface TitleSectionProps {
 }
 
 export interface SubDescriptionProps extends TitleSectionProps { }
+
+export interface CreatorCardProps {
+  avatar: string;
+  name: string;
+  totalSales: number;
+  rank: number;
+}
+
+export interface AccountInfo {
+  account: string;
+  avatar: string;
+  xummProfile: {
+    accountAlias: string | null,
+    ownerAlias: string | null,
+    profileUrl: string | null,
+  };
+}
+
