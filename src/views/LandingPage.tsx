@@ -1,5 +1,4 @@
 import { Button, useDisclosure, Box } from "@chakra-ui/react";
-import "../App.css";
 import CustomModal from "../components/CustomModal";
 import { APP_TEXTS } from "../utils/constant";
 import { XummIcon } from "../assets";

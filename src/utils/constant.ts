@@ -42,6 +42,7 @@ const APP_TEXTS = {
   youOwnThisNftAndHaveSetAOffers: "You own this NFT and have set a sell offer",
   acceptOffer: "Accept offer",
   setPrice: "Set price",
+  watchChainMarketPlace: "Watch Chain Marketplace",
   heroTitle: "Discover, Create & Collect luxury watches NFTs",
   subHeroDescription: "Watches NFT Marketplace. Create, buy and sell luxury watches NFTs on the XRPL blockchain.",
   getStartedBtnText: "Get Started",
@@ -59,8 +60,12 @@ const APP_TEXTS = {
   topCreators: 'Top Creators',
   currency: 'XRP',
   topCreatorsDescription: 'Checkout Top Rated Creators on the NFT Marketplace.',
+  explore: 'Explore',
+  joinNewsletter: 'Join our weekly digest',
+  subFooterDescription: 'Create, buy and sell luxury watches NFTs.',
   lorenIpsum:
     "Lorem ipsum dolor sit amet, consectetur adipiscing elit.Lorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elitLorem ipsum dolor sit amet, consectetur adipiscing elit",
+  joinCommunity: "Join our community",
 };
 
 const navBarItems = [

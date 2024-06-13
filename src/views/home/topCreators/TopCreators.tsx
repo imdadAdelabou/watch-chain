@@ -26,7 +26,7 @@ export const CreatorCard: React.FC<CreatorCardProps> = ({
       <div>
         <Text
           as="h3"
-          className="font-[600] text-[22px] leading-[140%] lg:text-center lg:mt-[20px]"
+          className="font-[600] text-[22px] leading-[140%] lg:text-center lg:mt-[20px] w-[200px]"
           fontFamily="Work Sans"
           marginBottom="5px"
         >

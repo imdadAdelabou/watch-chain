@@ -13,6 +13,7 @@ const DiscoverOtherNft = React.lazy(() => import("./DiscoverOtherNft"));
 import { Box } from "@chakra-ui/react";
 import Hero from "./hero/Hero";
 import HowItWorks from "./howItWorks/HowItWorks";
+import Footer from "../../components/layout/Footer";
 
 const TopCreators = React.lazy(() => import("./topCreators/TopCreators"));
 
@@ -74,7 +75,7 @@ const IndexView: React.FC = ({}) => {
   // }, [account]);
 
   return (
-    <div style={{ padding: 20 }}>
+    <div>
       <Hero />
       <Box paddingX={["20px", "150px"]}>
         <Suspense fallback={<h1>Loading</h1>}>
@@ -89,6 +90,8 @@ const IndexView: React.FC = ({}) => {
         <div className="spacer mt-[80px]"></div>
         <HowItWorks />
       </Box>
+      <div className="spacer mt-[80px]"></div>
+      <Footer />
     </div>
   );
 };
