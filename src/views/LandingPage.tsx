@@ -10,14 +10,29 @@ import { AppDispatch, RootState } from "../store";
 import { Outlet } from "react-router-dom";
 import BackDrop from "../components/hamburger_bar/Backdrop";
 import React from "react";
+import authUserService from "../services/authUserService";
+import LogoutModalContent from "../components/auth/LogoutModalContent";
+import LocalStorage from "../services/LocalStorage";
 
 const LandingPage: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const jwt = useSelector((state: RootState) => state.user.jwt);
   const openClassBackDrop = useSelector(
     (state: RootState) => state.user.openClassBackDrop
   );
   const dispatch: AppDispatch = useDispatch();
+  const isLoggedIn = authUserService.isLogedIn;
+
+  const login = () => {
+    XummAuth.login(dispatch).then(() => {
+      onClose();
+    });
+  };
+
+  const cancelLogout = () => onClose();
+  const logout = () => {
+    LocalStorage.clear();
+    onClose();
+  };
 
   return (
     <>
@@ -32,12 +47,12 @@ const LandingPage: React.FC = () => {
           <Header />
           <Button
             colorScheme=""
-            backgroundColor={jwt && jwt.length !== 0 ? "red" : "#4E5769"}
+            backgroundColor={isLoggedIn ? "red" : "#4E5769"}
             color="white"
             onClick={onOpen}
             display={["none", "block"]}
           >
-            {jwt && jwt.length !== 0 ? APP_TEXTS.logOut : APP_TEXTS.signIn}
+            {isLoggedIn ? APP_TEXTS.logOut : APP_TEXTS.signIn}
           </Button>
         </Box>
       </Box>
@@ -47,19 +62,20 @@ const LandingPage: React.FC = () => {
       <CustomModal
         isOpen={isOpen}
         onClose={onClose}
-        title={APP_TEXTS.connectWallet}
+        title={isLoggedIn ? APP_TEXTS.logOut : APP_TEXTS.connectWallet}
       >
-        <>
+        {isLoggedIn ? (
+          <LogoutModalContent
+            cancelCallBack={cancelLogout}
+            logoutCallBack={logout}
+          />
+        ) : (
           <WalletBtn
             label={APP_TEXTS.connectWithXumm}
             icon={XummIcon}
-            onClick={() => {
-              XummAuth.login(dispatch).then(() => {
-                onClose();
-              });
-            }}
+            onClick={login}
           />
-        </>
+        )}
       </CustomModal>
 
       <BackDrop openClass={openClassBackDrop || ""} />

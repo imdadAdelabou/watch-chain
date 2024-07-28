@@ -32,6 +32,10 @@ class LocalStorageService {
 
     return { ...user.me };
   }
+
+  clear() {
+    localStorage.clear();
+  }
 }
 
 const LocalStorage = new LocalStorageService();

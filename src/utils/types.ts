@@ -129,6 +129,15 @@ export interface SetNftPriceModalProps {
   getCurrentValue: (value: string) => void;
 }
 
+export interface AccountInfo {
+  account: string;
+  avatar: string;
+  xummProfile: {
+    accountAlias: string | null,
+    ownerAlias: string | null,
+    profileUrl: string | null,
+  };
+}
 
 // Props
 
@@ -155,13 +164,8 @@ export interface CreatorCardProps {
   rank: number;
 }
 
-export interface AccountInfo {
-  account: string;
-  avatar: string;
-  xummProfile: {
-    accountAlias: string | null,
-    ownerAlias: string | null,
-    profileUrl: string | null,
-  };
+export interface LogoutModalContentProps {
+  cancelCallBack: () => void;
+  logoutCallBack: () => void;
 }
 

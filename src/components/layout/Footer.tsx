@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
             {APP_TEXTS.subFooterDescription}
           </Text>
           <Text
-            className="text-[16px] leading-[140%] text-[#CCCCCC] mb-[15px]"
+            className="text-[16px] leading-[140%] text-[#CCCCCC] mb-[15px] cursor-pointer"
             fontFamily="Work Sans"
           >
             {APP_TEXTS.joinCommunity}
@@ -59,7 +59,7 @@ const Footer: React.FC = () => {
           {_explorerLinks.map((link, index) => (
             <li key={index}>
               <Text
-                className={`text-[16px] leading-[140%] text-[#CCCCCC] ${
+                className={`text-[16px] leading-[140%] text-[#CCCCCC] cursor-pointer ${
                   index != _explorerLinks.length - 1 ? "mb-[15px]" : "mb-[0px]"
                 }`}
                 fontFamily="Work Sans"
